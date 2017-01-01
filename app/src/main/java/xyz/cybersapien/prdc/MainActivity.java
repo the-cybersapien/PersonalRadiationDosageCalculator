@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import xyz.cybersapien.prdc.helpers.HelperUtils;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getName();
@@ -42,8 +44,9 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.fragment_container, firstFragment, LOCATIONFRAGMENT)
                     .commit();
         }
-
-        showInternetErrorDialog();
+        if (!HelperUtils.isInternetConnected(this)){
+            showInternetErrorDialog();
+        }
     }
 
 
@@ -97,12 +100,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 MainActivity.this.finish();
-            }
-        });
-        netAlertBuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
             }
         });
         netAlertBuilder.create().show();

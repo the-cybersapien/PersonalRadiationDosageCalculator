@@ -200,57 +200,61 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
 
         @Override
         protected Double doInBackground(Location... params) {
-            try {
-                Log.d(LOG_TAG, "doInBackground: " + params[0]);
-                Double alt =  HelperUtils.getAltitude(params[0]);
-                Log.d(LOG_TAG, "doInBackground: " + alt);
-                return alt;
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (!HelperUtils.isInternetConnected(getContext())){
+                ((MainActivity)getActivity()).showInternetErrorDialog();
+            } else {
+                try {
+                    Double alt =  HelperUtils.getAltitude(params[0]);
+                    return alt;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             return 0d;
         }
 
         @Override
         protected void onPostExecute(Double result) {
-            altitude = result;
-            Log.d(LOG_TAG, "onPostExecute: " + result);
+            if (result != 0){
+                altitude = result;
+                Log.d(LOG_TAG, "onPostExecute: " + result);
 
 
-            Double rads = HelperUtils.getCosmicRaysRads(altitude);
-            containerActivity.addRads(rads - cosmicRadiation);
-            cosmicRadiation = rads;
+                Double rads = HelperUtils.getCosmicRaysRads(altitude);
+                containerActivity.addRads(rads - cosmicRadiation);
+                cosmicRadiation = rads;
 
-            TextView cosmicTextView = (TextView) fragmentView.findViewById(R.id.cosmic_radiation_value);
-            cosmicTextView.setText(rads.toString());
-            fragmentView.findViewById(R.id.cosmic_layout).setVisibility(View.VISIBLE);
+                TextView cosmicTextView = (TextView) fragmentView.findViewById(R.id.cosmic_radiation_value);
+                cosmicTextView.setText(String.valueOf(cosmicRadiation));
+                fragmentView.findViewById(R.id.cosmic_layout).setVisibility(View.VISIBLE);
 
-            nearestLocationOntable = HelperUtils.getNearestTabLocation(location);
-            Bundle extraBundles = nearestLocationOntable.getExtras();
+                nearestLocationOntable = HelperUtils.getNearestTabLocation(location);
+                Bundle extraBundles = nearestLocationOntable.getExtras();
 
-            Double terrestialRads = extraBundles.getDouble(HelperUtils.TERRESTRIAL, 0);
-            Double cosmogenicRads = extraBundles.getDouble(HelperUtils.COSMOGENIC, 0);
-            Double inhalationRads = extraBundles.getDouble(HelperUtils.INHALATION, 0);
-            Double ingestionRads = extraBundles.getDouble(HelperUtils.INGESTION, 0);
+                Double terrestialRads = extraBundles.getDouble(HelperUtils.TERRESTRIAL, 0);
+                Double cosmogenicRads = extraBundles.getDouble(HelperUtils.COSMOGENIC, 0);
+                Double inhalationRads = extraBundles.getDouble(HelperUtils.INHALATION, 0);
+                Double ingestionRads = extraBundles.getDouble(HelperUtils.INGESTION, 0);
 
-            TextView terrestialRadsTextView = (TextView) fragmentView.findViewById(R.id.terrestial_radiation_value);
-            terrestialRadsTextView.setText(terrestialRads.toString());
-            fragmentView.findViewById(R.id.terrestial_layout).setVisibility(View.VISIBLE);
+                TextView terrestialRadsTextView = (TextView) fragmentView.findViewById(R.id.terrestial_radiation_value);
+                terrestialRadsTextView.setText(String.valueOf(terrestialRads));
+                fragmentView.findViewById(R.id.terrestial_layout).setVisibility(View.VISIBLE);
 
-            TextView cosmogenicRadsTextView = (TextView) fragmentView.findViewById(R.id.cosmogenic_radiation_value);
-            cosmogenicRadsTextView.setText(String.valueOf(cosmogenicRads));
-            fragmentView.findViewById(R.id.cosmogenic_layout).setVisibility(View.VISIBLE);
+                TextView cosmogenicRadsTextView = (TextView) fragmentView.findViewById(R.id.cosmogenic_radiation_value);
+                cosmogenicRadsTextView.setText(String.valueOf(cosmogenicRads));
+                fragmentView.findViewById(R.id.cosmogenic_layout).setVisibility(View.VISIBLE);
 
-            TextView inhalationRadsTextView = (TextView) fragmentView.findViewById(R.id.inhalation_radiation_value);
-            inhalationRadsTextView.setText(String.valueOf(inhalationRads));
-            fragmentView.findViewById(R.id.inhalation_layout).setVisibility(View.VISIBLE);
+                TextView inhalationRadsTextView = (TextView) fragmentView.findViewById(R.id.inhalation_radiation_value);
+                inhalationRadsTextView.setText(String.valueOf(inhalationRads));
+                fragmentView.findViewById(R.id.inhalation_layout).setVisibility(View.VISIBLE);
 
-            TextView ingestionRadsTextView = (TextView) fragmentView.findViewById(R.id.ingestion_radiation_value);
-            ingestionRadsTextView.setText(String.valueOf(ingestionRads));
-            fragmentView.findViewById(R.id.ingestion_layout).setVisibility(View.VISIBLE);
+                TextView ingestionRadsTextView = (TextView) fragmentView.findViewById(R.id.ingestion_radiation_value);
+                ingestionRadsTextView.setText(String.valueOf(ingestionRads));
+                fragmentView.findViewById(R.id.ingestion_layout).setVisibility(View.VISIBLE);
 
-            containerActivity.addRads(terrestialRads - terrestialRadiation);
-            terrestialRadiation = terrestialRads;
+                containerActivity.addRads(terrestialRads - terrestialRadiation);
+                terrestialRadiation = terrestialRads;
+            }
         }
     }
 
@@ -258,13 +262,19 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
 
         @Override
         protected Location doInBackground(String... params) {
+            if (!HelperUtils.isInternetConnected(getContext())){
+                ((MainActivity)getActivity()).showInternetErrorDialog();
+                return null;
+            }
             return HelperUtils.getLocationFromAddress(params[0]);
         }
 
         @Override
         protected void onPostExecute(Location loc) {
-            location = loc;
-            getRads();
+            if (loc != null){
+                location = loc;
+                getRads();
+            }
         }
     }
 
@@ -272,14 +282,20 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
 
         @Override
         protected String doInBackground(Location... params) {
+            if (!HelperUtils.isInternetConnected(getContext())){
+                ((MainActivity)getActivity()).showInternetErrorDialog();
+                return null;
+            }
             return HelperUtils.getAddressFromLocation(params[0]);
         }
 
         @Override
         protected void onPostExecute(String s) {
-            address = s;
-            EditText searchText = (EditText) fragmentView.findViewById(R.id.locationEditText);
-            searchText.setText(address);
+            if (!s.isEmpty()){
+                address = s;
+                EditText searchText = (EditText) fragmentView.findViewById(R.id.locationEditText);
+                searchText.setText(address);
+            }
         }
     }
 }
