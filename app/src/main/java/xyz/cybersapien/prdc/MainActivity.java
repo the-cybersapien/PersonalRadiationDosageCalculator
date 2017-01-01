@@ -1,14 +1,17 @@
 package xyz.cybersapien.prdc;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String LOG_TAG = MainActivity.class.getName();
 
     public static String LOCATIONFRAGMENT = "LOCATIONFRAGMENT";
 
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
 
+        showInternetErrorDialog();
     }
 
 
@@ -84,4 +88,23 @@ public class MainActivity extends AppCompatActivity {
         total.setText(String.format("%.1f", totalRads));
     }
 
+    public void showInternetErrorDialog(){
+        AlertDialog.Builder netAlertBuilder = new AlertDialog.Builder(this);
+
+        netAlertBuilder.setMessage("Error! Please Check Internet Connection!");
+        netAlertBuilder.setTitle("No! Internet");
+        netAlertBuilder.setNegativeButton("Exit Application", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                MainActivity.this.finish();
+            }
+        });
+        netAlertBuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        netAlertBuilder.create().show();
+    }
 }

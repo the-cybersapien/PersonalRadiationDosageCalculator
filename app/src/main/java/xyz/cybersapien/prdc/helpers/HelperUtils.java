@@ -1,7 +1,10 @@
 package xyz.cybersapien.prdc.helpers;
 
+import android.content.Context;
 import android.location.Location;
+import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -15,6 +18,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 import xyz.cybersapien.prdc.BuildConfig;
 
@@ -27,6 +31,64 @@ public class HelperUtils {
 
     private static final String GOOGLE_ELEVATION_BASE_URL = "https://maps.googleapis.com/maps/api/elevation/json";
     private static final String GOOGLE_GEOCODE_BASE_URL = "https://maps.googleapis.com/maps/api/geocode/json";
+
+    public static final String TERRESTRIAL = "terrestrial";
+    public static final String INHALATION = "inhalation";
+    public static final String COSMOGENIC = "cosmogenic";
+    public static final String INGESTION = "ingestion";
+
+
+    private static Bundle BANGALORE_BUNDLE = new Bundle();
+    private static Bundle CHENNAI_BUNDLE = new Bundle();
+    private static Bundle DELHI_BUNDLE = new Bundle();
+    private static Bundle HYDERABAD_BUNDLE = new Bundle();
+    private static Bundle KOLKATTA_BUNDLE = new Bundle();
+    private static Bundle MUMBAI_BUNDLE = new Bundle();
+    private static Bundle NAGPUR_BUNDLE = new Bundle();
+    private static Bundle TRIVANDRUM_BUNDLE = new Bundle();
+
+    static {
+        BANGALORE_BUNDLE.putDouble(TERRESTRIAL, 412);
+        BANGALORE_BUNDLE.putDouble(INHALATION, 700);
+        BANGALORE_BUNDLE.putDouble(COSMOGENIC, 15);
+        BANGALORE_BUNDLE.putDouble(INGESTION, 315);
+
+        CHENNAI_BUNDLE.putDouble(TERRESTRIAL, 536);
+        CHENNAI_BUNDLE.putDouble(INHALATION, 550);
+        CHENNAI_BUNDLE.putDouble(COSMOGENIC, 15);
+        CHENNAI_BUNDLE.putDouble(INGESTION, 315);
+
+        DELHI_BUNDLE.putDouble(TERRESTRIAL, 477);
+        DELHI_BUNDLE.putDouble(INHALATION, 700);
+        DELHI_BUNDLE.putDouble(COSMOGENIC, 15);
+        DELHI_BUNDLE.putDouble(INGESTION, 315);
+
+        HYDERABAD_BUNDLE.putDouble(TERRESTRIAL, 875);
+        HYDERABAD_BUNDLE.putDouble(INHALATION, 1090);
+        HYDERABAD_BUNDLE.putDouble(COSMOGENIC, 15);
+        HYDERABAD_BUNDLE.putDouble(INGESTION, 315);
+
+        KOLKATTA_BUNDLE.putDouble(TERRESTRIAL, 568);
+        KOLKATTA_BUNDLE.putDouble(INHALATION, 1760);
+        KOLKATTA_BUNDLE.putDouble(COSMOGENIC, 15);
+        KOLKATTA_BUNDLE.putDouble(INGESTION, 315);
+
+        MUMBAI_BUNDLE.putDouble(TERRESTRIAL, 202);
+        MUMBAI_BUNDLE.putDouble(INHALATION, 620);
+        MUMBAI_BUNDLE.putDouble(COSMOGENIC, 15);
+        MUMBAI_BUNDLE.putDouble(INGESTION, 315);
+
+        NAGPUR_BUNDLE.putDouble(TERRESTRIAL, 317);
+        NAGPUR_BUNDLE.putDouble(INHALATION, 1960);
+        NAGPUR_BUNDLE.putDouble(COSMOGENIC, 15);
+        NAGPUR_BUNDLE.putDouble(INGESTION, 315);
+
+        TRIVANDRUM_BUNDLE.putDouble(TERRESTRIAL, 412);
+        TRIVANDRUM_BUNDLE.putDouble(INHALATION, 700);
+        TRIVANDRUM_BUNDLE.putDouble(COSMOGENIC, 15);
+        TRIVANDRUM_BUNDLE.putDouble(INGESTION, 315);
+    }
+
 
     public static double getCosmicRaysRads(Double altitude){
         if (altitude == null)
@@ -126,8 +188,6 @@ public class HelperUtils {
         return result;
     }
 
-
-
     public static Location getLocationFromAddress(String address) {
         Location loc = null;
 
@@ -213,5 +273,75 @@ public class HelperUtils {
             }
         }
         return output.toString();
+    }
+
+    public static Location getNearestTabLocation(Location loc1){
+        Location nearestLocation = null;
+        ArrayList<Location> locations = new ArrayList<>();
+
+        Location BANGALORE_LOCATION = new Location("412");
+        BANGALORE_LOCATION.setLongitude(77.5945627);
+        BANGALORE_LOCATION.setLatitude(12.9715987);
+        BANGALORE_LOCATION.setExtras(BANGALORE_BUNDLE);
+        locations.add(BANGALORE_LOCATION);
+
+        Location CHENNAI_LOCATION = new Location("536");
+        CHENNAI_LOCATION.setLongitude(80.2707184);
+        CHENNAI_LOCATION.setLatitude(13.0826802);
+        CHENNAI_LOCATION.setExtras(CHENNAI_BUNDLE);
+        locations.add(CHENNAI_LOCATION);
+
+        Location DELHI_LOCATION = new Location("477");
+        DELHI_LOCATION.setLongitude(77.1024902);
+        DELHI_LOCATION.setLatitude(28.7040592);
+        DELHI_LOCATION.setExtras(DELHI_BUNDLE);
+        locations.add(DELHI_LOCATION);
+
+        Location HYDERABAD_LOCATION = new Location("875");
+        HYDERABAD_LOCATION.setLongitude(78.486671);
+        HYDERABAD_LOCATION.setLatitude(17.385044);
+        HYDERABAD_LOCATION.setExtras(HYDERABAD_BUNDLE);
+        locations.add(HYDERABAD_LOCATION);
+
+        Location KOLKATTA_LOCATION = new Location("568");
+        KOLKATTA_LOCATION.setLongitude(88.363895);
+        KOLKATTA_LOCATION.setLatitude(22.572646);
+        KOLKATTA_LOCATION.setExtras(KOLKATTA_BUNDLE);
+        locations.add(KOLKATTA_LOCATION);
+
+        Location MUMBAI_LOCATION = new Location("202");
+        MUMBAI_LOCATION.setLongitude(72.8776560);
+        MUMBAI_LOCATION.setLatitude(19.0759837);
+        MUMBAI_LOCATION.setExtras(MUMBAI_BUNDLE);
+        locations.add(MUMBAI_LOCATION);
+
+        Location NAGPUR_LOCATION = new Location("317");
+        NAGPUR_LOCATION.setLongitude(21.1458004);
+        NAGPUR_LOCATION.setLatitude(79.0881546);
+        NAGPUR_LOCATION.setExtras(NAGPUR_BUNDLE);
+        locations.add(NAGPUR_LOCATION);
+
+        Location TRIVANDRUM_LOCATION = new Location("412");
+        TRIVANDRUM_LOCATION.setLongitude(76.9366376);
+        TRIVANDRUM_LOCATION.setLatitude(8.52413910);
+        TRIVANDRUM_LOCATION.setExtras(TRIVANDRUM_BUNDLE);
+        locations.add(TRIVANDRUM_LOCATION);
+
+        double nearestDistance = Double.MAX_VALUE;
+
+
+        for (Location e : locations) {
+            double distance = loc1.distanceTo(e);
+            if (distance < nearestDistance){
+                nearestDistance = distance;
+                nearestLocation = e;
+            }
+        }
+        return nearestLocation;
+    }
+
+    public static boolean isInternetConnected(Context context){
+        final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 }

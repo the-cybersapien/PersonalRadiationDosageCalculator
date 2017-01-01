@@ -7,7 +7,6 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -18,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import xyz.cybersapien.prdc.helpers.*;
 
@@ -39,10 +40,15 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
     private Location location;
     private boolean ifLocationDialogShown;
 
+    private Location nearestLocationOntable;
+
     private double altitude;
-    private double altitudeCosmic;
+    private double cosmicRadiation;
+    private double terrestialRadiation;
     private String address;
     private MainActivity containerActivity;
+
+    private double residenceRadiation;
 
     public LocationFragment() {
 
@@ -65,6 +71,31 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
                 addressTask.execute(address);
             }
         });
+
+        RadioGroup materialGroup = (RadioGroup) fragmentView.findViewById(R.id.residenceBuildingGroup);
+        materialGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.radioYes:
+                        if (residenceRadiation == 0){
+                            residenceRadiation = 7;
+                            containerActivity.addRads(residenceRadiation);
+                            fragmentView.findViewById(R.id.residence_layout).setVisibility(View.VISIBLE);
+                            ((TextView)fragmentView.findViewById(R.id.residence_radiation_value)).setText(String.valueOf(residenceRadiation));
+                        }
+                        break;
+                    case R.id.radioNo:
+                        if (residenceRadiation == 7){
+                            residenceRadiation = 0;
+                            containerActivity.addRads(-7d);
+                            fragmentView.findViewById(R.id.residence_layout).setVisibility(View.GONE);
+                            ((TextView)fragmentView.findViewById(R.id.residence_radiation_value)).setText(String.valueOf(0));
+                        }
+                        break;
+                }
+            }
+        });
         return fragmentView;
     }
 
@@ -72,7 +103,9 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
     public void onCreate(@Nullable Bundle savedInstanceState) {
         ifLocationDialogShown = false;
         altitude = 0;
-        altitudeCosmic = 0;
+        cosmicRadiation = 0;
+        terrestialRadiation = 0;
+        residenceRadiation = 0;
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(getContext())
                     .addConnectionCallbacks(this)
@@ -105,7 +138,7 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
                 .getLastLocation(mGoogleApiClient);
         LocationToAddressASyncTask addTask = new LocationToAddressASyncTask();
         addTask.execute(location);
-        checkAltitude();
+        getRads();
         Log.d(LOG_TAG, "onConnected: " + location);
     }
 
@@ -128,9 +161,9 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
 
     }
 
-    private void checkAltitude(){
-        AltitudeAsyncTask altitudeAsyncTask = new AltitudeAsyncTask();
-        altitudeAsyncTask.execute(location);
+    private void getRads(){
+        GetRadsTask getRadsTask = new GetRadsTask();
+        getRadsTask.execute(location);
     }
 
     protected void createLocationRequest(){
@@ -163,7 +196,7 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
         errorDialog.create().show();
     }
 
-    private class AltitudeAsyncTask extends AsyncTask<Location, Void, Double> {
+    private class GetRadsTask extends AsyncTask<Location, Void, Double> {
 
         @Override
         protected Double doInBackground(Location... params) {
@@ -182,14 +215,42 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
         protected void onPostExecute(Double result) {
             altitude = result;
             Log.d(LOG_TAG, "onPostExecute: " + result);
+
+
             Double rads = HelperUtils.getCosmicRaysRads(altitude);
-            if (!rads.isNaN()){
-                rads -= altitudeCosmic;
-                containerActivity.addRads(rads);
-                altitudeCosmic = rads;
-            } else {
-                Snackbar.make(fragmentView, "Error getting data", Snackbar.LENGTH_LONG);
-            }
+            containerActivity.addRads(rads - cosmicRadiation);
+            cosmicRadiation = rads;
+
+            TextView cosmicTextView = (TextView) fragmentView.findViewById(R.id.cosmic_radiation_value);
+            cosmicTextView.setText(rads.toString());
+            fragmentView.findViewById(R.id.cosmic_layout).setVisibility(View.VISIBLE);
+
+            nearestLocationOntable = HelperUtils.getNearestTabLocation(location);
+            Bundle extraBundles = nearestLocationOntable.getExtras();
+
+            Double terrestialRads = extraBundles.getDouble(HelperUtils.TERRESTRIAL, 0);
+            Double cosmogenicRads = extraBundles.getDouble(HelperUtils.COSMOGENIC, 0);
+            Double inhalationRads = extraBundles.getDouble(HelperUtils.INHALATION, 0);
+            Double ingestionRads = extraBundles.getDouble(HelperUtils.INGESTION, 0);
+
+            TextView terrestialRadsTextView = (TextView) fragmentView.findViewById(R.id.terrestial_radiation_value);
+            terrestialRadsTextView.setText(terrestialRads.toString());
+            fragmentView.findViewById(R.id.terrestial_layout).setVisibility(View.VISIBLE);
+
+            TextView cosmogenicRadsTextView = (TextView) fragmentView.findViewById(R.id.cosmogenic_radiation_value);
+            cosmogenicRadsTextView.setText(String.valueOf(cosmogenicRads));
+            fragmentView.findViewById(R.id.cosmogenic_layout).setVisibility(View.VISIBLE);
+
+            TextView inhalationRadsTextView = (TextView) fragmentView.findViewById(R.id.inhalation_radiation_value);
+            inhalationRadsTextView.setText(String.valueOf(inhalationRads));
+            fragmentView.findViewById(R.id.inhalation_layout).setVisibility(View.VISIBLE);
+
+            TextView ingestionRadsTextView = (TextView) fragmentView.findViewById(R.id.ingestion_radiation_value);
+            ingestionRadsTextView.setText(String.valueOf(ingestionRads));
+            fragmentView.findViewById(R.id.ingestion_layout).setVisibility(View.VISIBLE);
+
+            containerActivity.addRads(terrestialRads - terrestialRadiation);
+            terrestialRadiation = terrestialRads;
         }
     }
 
@@ -203,7 +264,7 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
         @Override
         protected void onPostExecute(Location loc) {
             location = loc;
-            checkAltitude();
+            getRads();
         }
     }
 

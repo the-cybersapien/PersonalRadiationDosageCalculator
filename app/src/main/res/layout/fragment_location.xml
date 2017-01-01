@@ -77,6 +77,191 @@
 
             </android.support.v7.widget.CardView>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cosmic_layout"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cosmic Radiation: "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AddRadiation"
+                    android:text="+"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cosmic_radiation_value"
+                    style="@style/TextAppearance.AddRadiation"
+                    tools:text="451"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:id="@+id/cosmic_rad_units"
+                    style="@style/TextAppearance.AddRadiation"
+                    android:text="\u00B5Sv"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/terrestial_layout"
+                android:orientation="horizontal"
+                tools:visibility="visible"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Terrestial Radiation: "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AddRadiation"
+                    android:text="+"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/terrestial_radiation_value"
+                    style="@style/TextAppearance.AddRadiation"
+                    tools:text="451"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:id="@+id/terrestial_rad_units"
+                    style="@style/TextAppearance.AddRadiation"
+                    android:text="\u00B5Sv"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cosmogenic_layout"
+                android:orientation="horizontal"
+                tools:visibility="visible"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cosmogenic Atmospheric Radiation: "
+                    android:id="@+id/textView" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AddRadiation"
+                    android:text="+"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cosmogenic_radiation_value"
+                    style="@style/TextAppearance.AddRadiation"
+                    tools:text="451"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:id="@+id/cosmogenic_rad_units"
+                    style="@style/TextAppearance.AddRadiation"
+                    android:text="\u00B5Sv"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/inhalation_layout"
+                android:orientation="horizontal"
+                tools:visibility="visible"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Atmospheric Radiation: "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AddRadiation"
+                    android:text="+"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/inhalation_radiation_value"
+                    style="@style/TextAppearance.AddRadiation"
+                    tools:text="451"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:id="@+id/inhalation_rad_units"
+                    style="@style/TextAppearance.AddRadiation"
+                    android:text="\u00B5Sv"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ingestion_layout"
+                android:orientation="horizontal"
+                tools:visibility="visible"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ingested Radiation: "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AddRadiation"
+                    android:text="+"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ingestion_radiation_value"
+                    style="@style/TextAppearance.AddRadiation"
+                    tools:text="451"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:id="@+id/ingestion_rad_units"
+                    style="@style/TextAppearance.AddRadiation"
+                    android:text="\u00B5Sv"/>
+
+            </LinearLayout>
+
             <android.support.v7.widget.CardView
                 style="@style/CardView.Base" >
 
@@ -133,6 +318,42 @@
 
             </android.support.v7.widget.CardView>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/residence_layout"
+                android:orientation="horizontal"
+                tools:visibility="visible"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Material Residual Radiation: "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AddRadiation"
+                    android:text="+"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/residence_radiation_value"
+                    style="@style/TextAppearance.AddRadiation"
+                    tools:text="451"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:id="@+id/residence_rad_units"
+                    style="@style/TextAppearance.AddRadiation"
+                    android:text="\u00B5Sv"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

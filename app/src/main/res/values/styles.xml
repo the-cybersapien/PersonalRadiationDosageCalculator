@@ -32,4 +32,9 @@
         <item name="android:layout_marginBottom">5dp</item>
     </style>
 
+    <style name="TextAppearance.AddRadiation" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/holo_red_light</item>
+    </style>
+
 </resources>
