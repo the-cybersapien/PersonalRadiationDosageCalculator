@@ -139,7 +139,6 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
         LocationToAddressASyncTask addTask = new LocationToAddressASyncTask();
         addTask.execute(location);
         getRads();
-        Log.d(LOG_TAG, "onConnected: " + location);
     }
 
     @Override
@@ -155,7 +154,6 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
                     onConnected(null);
                 } else if (!ifLocationDialogShown){
                     showLocationErrorDialog();
-                    Log.d(LOG_TAG, "onRequestPermissionsResult: Error getting Permissions!");
                 }
         }
 
@@ -217,8 +215,6 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
         protected void onPostExecute(Double result) {
             if (result != 0){
                 altitude = result;
-                Log.d(LOG_TAG, "onPostExecute: " + result);
-
 
                 Double rads = HelperUtils.getCosmicRaysRads(altitude);
                 containerActivity.addRads(rads - cosmicRadiation);

@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Nuclear Energy</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_convertor">ConvertorActivity</string>
+
+    <string-array name="rad_units">
+        <item>Rad</item>
+        <item>Gray</item>
+        <item>Rem</item>
+        <item>Sievert</item>
+        <item>Roentgen</item>
+        <item>Coulomb per kilogram</item>
+    </string-array>
 </resources>
