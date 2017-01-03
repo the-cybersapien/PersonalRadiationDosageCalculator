@@ -12,7 +12,6 @@ public class ConvertUtils {
      * Public Constants for different powers of 10
      * for conversions
      */
-    public static final Double TERA = Math.pow(10, 12);
     public static final Double GIGA = Math.pow(10, 9);
     public static final Double MEGA = Math.pow(10, 6);
     public static final Double KILO = Math.pow(10, 3);
@@ -30,11 +29,11 @@ public class ConvertUtils {
 
     public static Double convertRem(Double rem, int choice){
         switch (choice){
-            case GRAY:
-                return rem / 100;
             case RAD:
+            case REM:
                 return rem;
             case SIEVERT:
+            case GRAY:
                 return rem / 100;
             case ROENTGEN:
                 return rem * 1.14;
@@ -48,6 +47,7 @@ public class ConvertUtils {
     public static Double convertRad(Double rad, int choice){
         switch (choice){
             case REM:
+            case RAD:
                 return rad;
             case SIEVERT:
             case GRAY:
@@ -67,6 +67,7 @@ public class ConvertUtils {
             case REM:
                 return gray * 100;
             case SIEVERT:
+            case GRAY:
                 return gray;
             case ROENTGEN:
                 return gray * 114;
@@ -83,6 +84,7 @@ public class ConvertUtils {
             case REM:
                 return sievert * 100;
             case GRAY:
+            case SIEVERT:
                 return sievert;
             case ROENTGEN:
                 return sievert * 114;
@@ -101,6 +103,8 @@ public class ConvertUtils {
             case GRAY:
             case SIEVERT:
                 return roentgen * .00877;
+            case ROENTGEN:
+                return roentgen;
             case COULOMB_PER_KILOGRAM:
                 return roentgen * 0.000258;
             default:
@@ -118,6 +122,8 @@ public class ConvertUtils {
                 return CpKg * 34;
             case ROENTGEN:
                 return CpKg * 3876;
+            case COULOMB_PER_KILOGRAM:
+                return CpKg;
             default:
                 return Double.NaN;
         }

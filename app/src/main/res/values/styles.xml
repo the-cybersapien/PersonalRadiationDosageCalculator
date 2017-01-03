@@ -37,4 +37,14 @@
         <item name="android:textColor">@android:color/holo_red_light</item>
     </style>
 
+    <style name="TextAppearance.Convertor.Value" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="TextAppearance.Convertor.Unit" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textSize">22sp</item>
+        <item name="android:gravity">bottom</item>
+    </style>
 </resources>

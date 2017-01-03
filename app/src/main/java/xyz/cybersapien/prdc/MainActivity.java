@@ -94,16 +94,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showInternetErrorDialog(){
+
         AlertDialog.Builder netAlertBuilder = new AlertDialog.Builder(this);
 
-        netAlertBuilder.setMessage("Error! Please Check Internet Connection!");
-        netAlertBuilder.setTitle("No! Internet");
-        netAlertBuilder.setNegativeButton("Exit Application", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                MainActivity.this.finish();
-            }
-        });
-        netAlertBuilder.create().show();
+        netAlertBuilder
+                .setMessage("Error! Please Check Internet Connection!")
+                .setTitle("No! Internet")
+                .setNegativeButton("Exit Application", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.this.finish();
+                    }
+                })
+                .create();
+        netAlertBuilder.show();
     }
 }

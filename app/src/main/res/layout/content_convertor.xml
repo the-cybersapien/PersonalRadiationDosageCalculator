@@ -16,20 +16,184 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <TextView
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Value"
+                android:id="@+id/convertor_from_edit_text"
+                android:inputType="numberDecimal"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <fr.ganfra.materialspinner.MaterialSpinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="From:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+            app:ms_hint="Units"
+            android:id="@+id/convertor_from_spinner"/>
 
-        <Spinner
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/rad_layout">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            style="@style/TextAppearance.Convertor.Value"
+            android:layout_height="wrap_content"
+            android:id="@+id/rad_val_display"
+            tools:text="25.00"
+            android:fontFamily="sans-serif"/>
+
+        <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:id="@+id/convertor_from_spinner" />
+            style="@style/TextAppearance.Convertor.Unit"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:id="@+id/rad_unit_display"
+            android:text="Rads" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/gray_layout">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:id="@+id/gray_val_display"
+            style="@style/TextAppearance.Convertor.Value"
+            tools:text="25.00"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.Convertor.Unit"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:id="@+id/gray_unit_display"
+            android:text="Grays"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/rem_layout">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.Convertor.Value"
+            android:id="@+id/rem_val_display"
+            tools:text="25.00"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            style="@style/TextAppearance.Convertor.Unit"
+            android:id="@+id/rem_unit_display"
+            android:text="Rems"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/sievert_layout">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.Convertor.Value"
+            android:id="@+id/sievert_val_display"
+            tools:text="25.00"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:id="@+id/sievert_unit_display"
+            style="@style/TextAppearance.Convertor.Unit"
+            android:text="Sieverts"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/roentgen_layout">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.Convertor.Value"
+            android:id="@+id/roentgen_val_display"
+            tools:text="25.00"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            style="@style/TextAppearance.Convertor.Unit"
+            android:id="@+id/roentgen_unit_display"
+            android:text="Roentgens"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/coulombPKilo_layout">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.Convertor.Value"
+            android:id="@+id/coulombPKilo_val_display"
+            tools:text="25.00"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.Convertor.Unit"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:id="@+id/coulombPKilo_unit_display"
+            android:text="Cb/kg"/>
 
     </LinearLayout>
 

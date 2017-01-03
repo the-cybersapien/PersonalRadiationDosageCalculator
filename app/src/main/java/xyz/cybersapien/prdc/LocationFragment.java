@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import butterknife.BindView;
 import xyz.cybersapien.prdc.helpers.*;
 
 import com.google.android.gms.common.api.GoogleApiClient;
