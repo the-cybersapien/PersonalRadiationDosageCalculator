@@ -12,11 +12,23 @@ import android.widget.TextView;
 
 import xyz.cybersapien.prdc.helpers.HelperUtils;
 
+/**
+ * The App uses the values location based exposure from an Article by
+ * the International Journal of Radiation research, present here:
+ * http://www.ijrr.com/article-1-738-en.pdf
+ *
+ * Medical and LifeStyle based exposure values are from the following websites and articles:
+ * https://www.nrc.gov/about-nrc/radiation/around-us/calculator.html
+ * https://www.epa.gov/radiation/calculate-your-radiation-dose#self
+ *
+ * http://www.nrc.gov/reading-rm/basic-ref/students/for-educators/average-dose-worksheet.pdf
+ */
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getName();
 
-    public static String LOCATIONFRAGMENT = "LOCATIONFRAGMENT";
+    public static String LOCATION_FRAGMENT = "LOCATION_FRAGMENT";
+    public static final String LIFESTYLE_FRAGMENT = "LIFESTYLE_FRAGMENT";
 
     private Double totalRads;
 
@@ -43,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             // Add the fragment to the container
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.fragment_container, firstFragment, LOCATIONFRAGMENT)
+                    .add(R.id.fragment_container, firstFragment, LOCATION_FRAGMENT)
                     .commit();
         }
         if (!HelperUtils.isInternetConnected(this)){
@@ -69,6 +81,13 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_convertor) {
             startActivity(new Intent(MainActivity.this, ConvertorActivity.class));
             return true;
+        } else if (id == R.id.action_settings){
+            LifeStyleFragment lf = new LifeStyleFragment();
+
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, lf, LIFESTYLE_FRAGMENT)
+                    .addToBackStack(LIFESTYLE_FRAGMENT)
+                    .commit();
         }
 
         return super.onOptionsItemSelected(item);

@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose which medical Procedures you have had"
+            style="@style/TextAppearance.Question"
+            />
+
+        <CheckBox
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="X-ray"
+            android:id="@+id/medical_check_xray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/medical_xray_container"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_xray_skull"
+                    android:text="Skull"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_xray_skull_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_xray_chest"
+                    android:text="Chest"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_xray_chest_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_xray_thoracic_spine"
+                    android:text="Thoracic Spine"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_xray_thoracic_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_xray_lumbar_spine"
+                    android:text="Lumbar Spine"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_xray_lumbar_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_xray_abdomen"
+                    android:text="Abdomen"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_xray_abdomen_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_xray_pelvis"
+                    android:text="Pelvis"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_xray_pelvis_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_xray_dental_films"
+                    android:text="Dental Films"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_xray_dental_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_xray_limbs_joints"
+                    android:text="Limbs and Joints"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_xray_limbs_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_xray_total_button"
+                    android:text="Find Total"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/xray_total_text_view"
+                    android:gravity="end|center_vertical"
+                    style="@style/TextAppearance.AddRadiation"
+                    tools:text="55d"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <CheckBox
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Procedure"
+            android:id="@+id/medical_check_procedure"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/medical_procedure_container"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_procedure_IVP"
+                    android:text="IVP (kidneys)"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_procedure_IVP_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_procedure_barium_swallow"
+                    android:text="Barium Swallow (Esophagram)"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_procedure_barium_swallow_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_procedure_barium_meal"
+                    android:text="Barium meal"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_procedure_barium_meal_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_procedure_barium_follow_up"
+                    android:text="Barium Follow-up"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_procedure_barium_follow_up_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_procedure_barium_enema"
+                    android:text="Barium enema"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_procedure_barium_enema_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_procedure_CT_head"
+                    android:text="CT Scan (head)"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_procedure_CT_head_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_procedure_CT_chest"
+                    android:text="CT Scan (chest)"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_procedure_CT_chest_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_procedure_CT_abdomen"
+                    android:text="CT Scan (abdomen)"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_procedure_CT_abdomen_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_procedure_CT_pelvis"
+                    android:text="CT Scan (pelvis)"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_procedure_CT_pelvis_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_procedure_PTCA"
+                    android:text="PTCA (heart study)"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_procedure_PTCA_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_procedure_coronary"
+                    android:text="Coronary Angiography"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_procedure_coronary_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_procedure_mammogram"
+                    android:text="Mammogram"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="54"
+                    android:id="@+id/medical_procedure_mammogram_rad_count"
+                    style="@style/TextAppearance.AddRadiation"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medical_procedure_total_button"
+                    android:text="Find Total"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/procedure_total_text_view"
+                    android:gravity="end|center_vertical"
+                    style="@style/TextAppearance.AddRadiation"
+                    tools:text="55d"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <CheckBox
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Nuclear Medicine Exam"
+            android:id="@+id/medical_check_nuclear_meds"/>
+
+        <CheckBox
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Nuclear Medicine Exam for Fetus"
+            android:id="@+id/medical_check_nuclear_meds_fetus"/>
+
+        <CheckBox
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Radiation Exams during Pregnancy"
+            android:id="@+id/medical_check_pregnancy"/>
+
+
+    </LinearLayout>
+
+</FrameLayout>

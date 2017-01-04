@@ -89,6 +89,27 @@ public class HelperUtils {
         TRIVANDRUM_BUNDLE.putDouble(INGESTION, 315);
     }
 
+    // Averaged out values from US-EPA website
+    public static final double XRAY_SKULL = 20;
+    public static final double XRAY_CHEST = 40;
+    public static final double XRAY_THORACIC_SPINE = 350;
+    public static final double XRAY_LUMBAR_SPINE = 500;
+    public static final double XRAY_ABDOMEN = 615;
+    public static final double XRAY_PELVIS = 765;
+    public static final double XRAY_DENTAL = 4;
+    public static final double XRAY_LIMBS = 60;
+    public static final double PROCEDURE_IVP = 2500;
+    public static final double PROCEDURE_BARIUM_SWALLOW = 1500;
+    public static final double PROCEDURE_BARIUM_MEAL = 3000;
+    public static final double PROCEDURE_BARIUM_FOLLOW_UP = 3000;
+    public static final double PROCEDURE_BARIUM_ENEMA = 7000;
+    public static final double PROCEDURE_CT_HEAD = 2000;
+    public static final double PROCEDURE_CT_CHEST = 8000;
+    public static final double PROCEDURE_CT_ABDOMEN = 10000;
+    public static final double PROCEDURE_CT_PELVIS = 10000;
+    public static final double PROCEDURE_PTCA = 7500;
+    public static final double PROCEDURE_CORONARY = 4600;
+    public static final double PROCEDURE_MAMMOGRAM = 130;
 
     public static double getCosmicRaysRads(Double altitude){
         if (altitude == null)
@@ -208,7 +229,8 @@ public class HelperUtils {
     }
 
     private static Location parseLocationFromJSON(String jsonResponse) throws JSONException {
-
+        if (jsonResponse.isEmpty())
+            return null;
         JSONObject root = new JSONObject(jsonResponse);
         JSONArray resultArray = root.getJSONArray("results");
         JSONObject geometry = resultArray.getJSONObject(0).getJSONObject("geometry");

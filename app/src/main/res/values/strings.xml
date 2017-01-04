@@ -22,11 +22,10 @@
         <item>Micro</item>
         <item>Nano</item>
     </string-array>
-    '
+
+    <string name="additional_radiation_display">+ %.2fµSv</string>
 
     <string name="display_val" formatted="false">%.5f%n</string>
     <string name="micro_sievert">µSv</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
