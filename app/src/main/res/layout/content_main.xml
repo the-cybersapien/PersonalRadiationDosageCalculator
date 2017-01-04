@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:background="@color/cardview_light_background"
-            android:text="SAMPLE EXPLAINATION TEXT FOR LOCATION"
+            android:text="SAMPLE EXPLAINATION TEXT FOR LOCATION/LIFESTYLE"
             android:id="@+id/rads_explaination"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
@@ -68,7 +68,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:text="mRem"
+            android:text="@string/micro_sievert"
             android:id="@+id/totalRadsUnitsTextView" />
 
     </LinearLayout>

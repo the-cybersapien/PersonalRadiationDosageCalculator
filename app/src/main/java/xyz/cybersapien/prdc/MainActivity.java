@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize the total Radiations to zero
         totalRads = 0d;
+        updateRads();
 
         // Check that the activity contains the fragment Container
         // and that the activity isn't being restored from a previous state
@@ -65,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_convertor) {
             startActivity(new Intent(MainActivity.this, ConvertorActivity.class));
             return true;
         }
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void updateRads() {
         TextView total = (TextView) findViewById(R.id.totalRadsTextView);
-        total.setText(String.format("%.1f", totalRads));
+        total.setText(String.format("%.2f", totalRads));
     }
 
     public void showInternetErrorDialog(){

@@ -20,8 +20,8 @@
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
+            android:layout_weight="2"
+            android:layout_height="wrap_content">
 
             <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
@@ -32,10 +32,10 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <fr.ganfra.materialspinner.MaterialSpinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:ms_hint="Units"
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:id="@+id/convertor_from_spinner"/>
 
     </LinearLayout>
