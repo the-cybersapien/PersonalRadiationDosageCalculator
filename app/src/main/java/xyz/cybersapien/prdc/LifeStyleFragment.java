@@ -2,30 +2,37 @@ package xyz.cybersapien.prdc;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import java.util.concurrent.Callable;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import xyz.cybersapien.prdc.helpers.HelperUtils;
 
 public class LifeStyleFragment extends Fragment {
 
     private static final String LOG_TAG = LifeStyleFragment.class.getSimpleName();
 
+    @BindView(R.id.kilometres_by_jet_edit_text) EditText kmByJetsEditText;
+    @BindView(R.id.rad_by_jet) TextView radsByJetsTextView;
+
+    @BindView(R.id.cigarette_packs_edit_text) EditText cigarettesEditText;
+    @BindView(R.id.rads_by_cigarette) TextView radsByCigarettes;
+
+    @BindView(R.id.wristwatch_rads) TextView wristWatchRads;
+
     private LayoutInflater layoutInflater;
     private MainActivity containerActivity;
     private View containerView;
     private View medicalContainerView;
-
-    private Double totalMedical;
 
     // Total value and booleans for X-rays
     private double totalXRay;
@@ -54,6 +61,15 @@ public class LifeStyleFragment extends Fragment {
     private boolean procedurePTCA;
     private boolean procedureCoronary;
     private boolean procedureMammogram;
+
+    // Cache value for recalculation of Radiation by jet
+    private double jetRadiation;
+
+    // Cache value for recalculation of Radiation by Cigarettes
+    private double cigaretteRadiation;
+
+    // Cache for recalculation of Radiation due to Luminous Watches
+    private double luminousWatches;
 
     public LifeStyleFragment() {
         // Required empty public constructor
@@ -87,6 +103,8 @@ public class LifeStyleFragment extends Fragment {
         procedurePTCA = false;
         procedureCoronary = false;
         procedureMammogram = false;
+
+        luminousWatches = 0;
         super.onCreate(savedInstanceState);
     }
 
@@ -99,16 +117,73 @@ public class LifeStyleFragment extends Fragment {
         layoutInflater = inflater;
         RadioGroup medicalTestsGroup = (RadioGroup) containerView.findViewById(R.id.medical_choice_radio_group);
         medicalTestsGroup.setOnCheckedChangeListener(medicalTestsChangeListener);
-
+        RadioGroup luminousWatchGroup = (RadioGroup) containerView.findViewById(R.id.wristwatch_group);
+        luminousWatchGroup.setOnCheckedChangeListener(watchChangeListener);
+        ButterKnife.bind(this, containerView);
         return containerView;
     }
 
-    private void initializeMedicalTests(){
-        CheckBox xrayCheckBox = (CheckBox) medicalContainerView.findViewById(R.id.medical_check_xray);
-        xrayCheckBox.setOnCheckedChangeListener(xrayCheckBoxListener);
-        CheckBox procedureCheckBox = (CheckBox) medicalContainerView.findViewById(R.id.medical_check_procedure);
-        procedureCheckBox.setOnCheckedChangeListener(procedureChangeListener);
+
+    @OnClick(R.id.calculate_rads_by_jet)
+    public void calculateJetRadiation(){
+        String kmStrings = kmByJetsEditText.getText().toString();
+        if (!kmStrings.isEmpty()){
+            Double kilometres = Double.valueOf(kmByJetsEditText.getText().toString());
+            Double totalRads = HelperUtils.getRadsByTravel(kilometres);
+            radsByJetsTextView.setText(getString(R.string.additional_radiation_display, totalRads));
+            radsByJetsTextView.setVisibility(View.VISIBLE);
+
+            if (jetRadiation != totalRads){
+                containerActivity.addRads(totalRads - jetRadiation);
+                jetRadiation = totalRads;
+            }
+
+            if (jetRadiation == 0)
+                radsByJetsTextView.setVisibility(View.GONE);
+        }
     }
+
+    @OnClick(R.id.calculate_rads_by_cigarette)
+    public void calculateCigaretteRads(){
+        String packsString = cigarettesEditText.getText().toString();
+        if (!packsString.isEmpty()){
+            Double packsPerDay = Double.valueOf(cigarettesEditText.getText().toString());
+            Double totalRads = packsPerDay * 4.9;
+
+            radsByCigarettes.setText(getString(R.string.additional_radiation_display, totalRads));
+            radsByCigarettes.setVisibility(View.VISIBLE);
+
+            if (cigaretteRadiation != totalRads){
+                containerActivity.addRads(totalRads - cigaretteRadiation);
+                cigaretteRadiation = totalRads;
+            }
+            if (cigaretteRadiation == 0)
+                radsByCigarettes.setVisibility(View.GONE);
+        }
+    }
+
+    private RadioGroup.OnCheckedChangeListener watchChangeListener = new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            switch (checkedId){
+                case R.id.wristwatch_yes:
+                    if (luminousWatches == 0){
+                        luminousWatches = 0.6;
+                        containerActivity.addRads(luminousWatches);
+                        wristWatchRads.setText(getString(R.string.additional_radiation_display, luminousWatches));
+                        wristWatchRads.setVisibility(View.VISIBLE);
+                    }
+                    break;
+                case R.id.wristwatch_no:
+                    if (luminousWatches != 0){
+                        containerActivity.addRads(-luminousWatches);
+                        luminousWatches = 0;
+                        wristWatchRads.setVisibility(View.GONE);
+                    }
+                    break;
+            }
+        }
+    };
 
     /**
      * Listener for RadioGroup for Medical Tests
@@ -121,11 +196,19 @@ public class LifeStyleFragment extends Fragment {
                 case R.id.medical_choice_yes_button:
                     medicalContainerView = layoutInflater.inflate(R.layout.medical_procedures_card, null);
                     containmentView.addView(medicalContainerView);
-                    initializeMedicalTests();
+
+                    CheckBox xrayCheckBox = (CheckBox) medicalContainerView.findViewById(R.id.medical_check_xray);
+                    xrayCheckBox.setOnCheckedChangeListener(xrayCheckBoxListener);
+                    CheckBox procedureCheckBox = (CheckBox) medicalContainerView.findViewById(R.id.medical_check_procedure);
+                    procedureCheckBox.setOnCheckedChangeListener(procedureChangeListener);
                     break;
                 case R.id.medical_choice_no_button:
                     containmentView.removeAllViews();
-                    totalMedical = 0d;
+                    if (totalProcedure != 0 && totalXRay != 0){
+                        containerActivity.addRads(0 - totalProcedure - totalXRay);
+                        totalXRay = 0;
+                        totalProcedure = 0;
+                    }
                     break;
             }
         }
@@ -323,6 +406,7 @@ public class LifeStyleFragment extends Fragment {
                 if (addedxRayData){
                     containerActivity.addRads(-1 * totalXRay);
                 }
+                totalXRay = 0;
             }
         }
     };
@@ -339,7 +423,7 @@ public class LifeStyleFragment extends Fragment {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (isChecked){
-                medicalContainerView.findViewById(R.id.procedures_container).setVisibility(View.VISIBLE);
+                medicalContainerView.findViewById(R.id.medical_procedure_container).setVisibility(View.VISIBLE);
 
                 CheckBox ivpCheckBox = (CheckBox) medicalContainerView.findViewById(R.id.medical_procedure_IVP);
                 ivpCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -594,11 +678,8 @@ public class LifeStyleFragment extends Fragment {
                 if (addedProcedureData){
                     containerActivity.addRads(-1 * totalProcedure);
                 }
+                totalProcedure = 0;
             }
         }
     };
-
-    private void updateMainActivity(){
-        containerActivity.addRads(totalMedical);
-    }
 }

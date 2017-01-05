@@ -8,8 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import xyz.cybersapien.prdc.helpers.HelperUtils;
 
 /**
@@ -30,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     public static String LOCATION_FRAGMENT = "LOCATION_FRAGMENT";
     public static final String LIFESTYLE_FRAGMENT = "LIFESTYLE_FRAGMENT";
 
+    @BindView(R.id.main_button_next) TextView nextButton;
+    @BindView(R.id.main_button_prev) TextView prevButton;
+
     private Double totalRads;
 
     @Override
@@ -39,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
 
         // Initialize the total Radiations to zero
         totalRads = 0d;
@@ -49,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         // else there might be overlapping fragments
         if (findViewById(R.id.fragment_container) != null && savedInstanceState == null) {
 
-            //Create a new Fragment to be placed
+            //Create a LocationFragment Fragment to be placed
             LocationFragment firstFragment = new LocationFragment();
 
             // Add the fragment to the container
@@ -61,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
         if (!HelperUtils.isInternetConnected(this)){
             showInternetErrorDialog();
         }
+
+        initiateWithLocationFragment();
     }
 
 
@@ -73,21 +83,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        if (id == R.id.action_convertor) {
-            startActivity(new Intent(MainActivity.this, ConvertorActivity.class));
-            return true;
-        } else if (id == R.id.action_settings){
-            LifeStyleFragment lf = new LifeStyleFragment();
-
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, lf, LIFESTYLE_FRAGMENT)
-                    .addToBackStack(LIFESTYLE_FRAGMENT)
-                    .commit();
+        // Handle action bar item clicks here.
+        switch (item.getItemId()){
+            case R.id.action_convertor:
+                startActivity(new Intent(MainActivity.this, ConvertorActivity.class));
+                return true;
+//            case R.id.action_settings:
+//                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void updateRads() {
         TextView total = (TextView) findViewById(R.id.totalRadsTextView);
-        total.setText(String.format("%.2f", totalRads));
+        total.setText(getString(R.string.total_radiation_display, totalRads));
     }
 
     public void showInternetErrorDialog(){
@@ -127,5 +129,36 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .create();
         netAlertBuilder.show();
+    }
+
+    private void initiateWithLocationFragment(){
+        nextButton.setText("NEXT");
+        nextButton.setVisibility(View.VISIBLE);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LifeStyleFragment lf = new LifeStyleFragment();
+
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.fragment_container, lf, LIFESTYLE_FRAGMENT)
+                        .addToBackStack(LIFESTYLE_FRAGMENT)
+                        .commit();
+                initiateWithLifeStyleFragment();
+            }
+        });
+        prevButton.setVisibility(View.GONE);
+    }
+
+    private void initiateWithLifeStyleFragment(){
+        nextButton.setVisibility(View.GONE);
+        prevButton.setText("PREVIOUS");
+        prevButton.setVisibility(View.VISIBLE);
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initiateWithLocationFragment();
+                onBackPressed();
+            }
+        });
     }
 }

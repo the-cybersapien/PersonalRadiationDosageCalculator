@@ -88,6 +88,7 @@ public class HelperUtils {
         TRIVANDRUM_BUNDLE.putDouble(COSMOGENIC, 15);
         TRIVANDRUM_BUNDLE.putDouble(INGESTION, 315);
     }
+    public static final double RESIDENT_MATERIAL_RADIATION = 70;
 
     // Averaged out values from US-EPA website
     public static final double XRAY_SKULL = 20;
@@ -365,5 +366,9 @@ public class HelperUtils {
     public static boolean isInternetConnected(Context context){
         final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
         return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+    }
+
+    public static Double getRadsByTravel(Double kilometres) {
+        return kilometres * 1.609344 / 100;
     }
 }

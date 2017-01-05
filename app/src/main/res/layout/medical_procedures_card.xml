@@ -235,8 +235,7 @@
             android:id="@+id/medical_procedure_container"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:visibility="gone"
-            tools:visibility="visible">
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -511,25 +510,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-        <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="Nuclear Medicine Exam"
-            android:id="@+id/medical_check_nuclear_meds"/>
-
-        <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="Nuclear Medicine Exam for Fetus"
-            android:id="@+id/medical_check_nuclear_meds_fetus"/>
-
-        <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="Radiation Exams during Pregnancy"
-            android:id="@+id/medical_check_pregnancy"/>
-
 
     </LinearLayout>
 

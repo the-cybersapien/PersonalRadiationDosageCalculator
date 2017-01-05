@@ -35,23 +35,28 @@
         android:layout_height="wrap_content"
         android:minHeight="?actionBarSize"
         android:layout_gravity="bottom"
-        android:paddingLeft="@dimen/activity_vertical_margin"
-        android:paddingRight="@dimen/activity_vertical_margin"
         android:orientation="horizontal"
         >
 
         <TextView
             android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/main_button_prev"
+            android:text="PREVIOUS"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:background="#00e676"
+            android:padding="5dp"
+            android:textColor="#212121"/>
+
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
+            android:layout_weight="2"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical|end"
             android:text="Total Radiation: "/>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,18 +64,21 @@
             android:gravity="center_vertical"
             android:id="@+id/totalRadsTextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:text="15"/>
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            tools:text="15"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:text="@string/micro_sievert"
-            android:id="@+id/totalRadsUnitsTextView" />
-
+            android:id="@+id/main_button_next"
+            android:text="NEXT"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:background="#00e676"
+            android:padding="5dp"
+            android:textColor="#212121"/>
     </LinearLayout>
 
 </LinearLayout>

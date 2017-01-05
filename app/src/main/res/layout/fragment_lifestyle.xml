@@ -59,6 +59,149 @@
 
         </android.support.v7.widget.CardView>
 
+        <android.support.v7.widget.CardView
+            style="@style/CardView.Base">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.Question"
+                    android:text="How many kilometres on average per year do you travel by jet?"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/kilometres_by_jet_edit_text"
+                        android:inputType="number"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/calculate_rads_by_jet"
+                        android:text="Calculate"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        style="@style/TextAppearance.AddRadiation"
+                        android:id="@+id/rad_by_jet"
+                        tools:text="+33"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            style="@style/CardView.Base">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.Question"
+                    android:text="How many packs of cigarettes do you smoke per DAY?"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/cigarette_packs_edit_text"
+                        android:inputType="number"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/calculate_rads_by_cigarette"
+                        android:text="Calculate"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        style="@style/TextAppearance.AddRadiation"
+                        android:id="@+id/rads_by_cigarette"
+                        tools:text="+33"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            style="@style/CardView.Base">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.Question"
+                    android:text="Do you wear a luminous Wristwatch?"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/wristwatch_group">
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Yes"
+                        android:id="@+id/wristwatch_yes"/>
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="No"
+                        android:id="@+id/wristwatch_no"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/wristwatch_rads"
+                        style="@style/TextAppearance.AddRadiation"
+                        android:visibility="gone"
+                        tools:text="451"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
     </LinearLayout>
 
 </ScrollView>

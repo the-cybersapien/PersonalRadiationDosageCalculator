@@ -23,7 +23,8 @@
         <item>Nano</item>
     </string-array>
 
-    <string name="additional_radiation_display">+ %.2fµSv</string>
+    <string name="additional_radiation_display">+ %.2f µSv</string>
+    <string name="total_radiation_display"> %.2f µSv</string>
 
     <string name="display_val" formatted="false">%.5f%n</string>
     <string name="micro_sievert">µSv</string>
