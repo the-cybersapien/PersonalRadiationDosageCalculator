@@ -3,6 +3,7 @@ package xyz.cybersapien.prdc;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         totalRads = 0d;
         updateRads();
 
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
         // Check that the activity contains the fragment Container
         // and that the activity isn't being restored from a previous state
         // else there might be overlapping fragments
@@ -88,8 +91,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_convertor:
                 startActivity(new Intent(MainActivity.this, ConvertorActivity.class));
                 return true;
-//            case R.id.action_settings:
-//                return true;
+            case R.id.action_settings:
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -111,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void updateRads() {
         TextView total = (TextView) findViewById(R.id.totalRadsTextView);
-        total.setText(getString(R.string.total_radiation_display, totalRads));
+        total.setText(getString(R.string.total_radiation_display, HelperUtils.getPreferredValue(totalRads, this)));
     }
 
     public void showInternetErrorDialog(){

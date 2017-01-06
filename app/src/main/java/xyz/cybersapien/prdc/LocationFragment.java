@@ -1,6 +1,7 @@
 package xyz.cybersapien.prdc;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -46,6 +47,8 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
 
     private double residenceRadiation;
 
+    private Context context;
+
     public LocationFragment() {
 
     }
@@ -78,7 +81,7 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
                         if (residenceRadiation == 0){
                             residenceRadiation = HelperUtils.RESIDENT_MATERIAL_RADIATION;
                             containerActivity.addRads(residenceRadiation);
-                            radsTextView.setText(getString(R.string.additional_radiation_display, residenceRadiation));
+                            radsTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(residenceRadiation, context)));
                             radsTextView.setVisibility(View.VISIBLE);
                         }
                         break;
@@ -104,6 +107,7 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
         totalLocationRadiation = 0d;
 
         setRetainInstance(true);
+        context = getContext();
 
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(getContext())
@@ -219,7 +223,7 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
                 totalRads += cosmicRadiation;
 
                 TextView cosmicTextView = (TextView) fragmentView.findViewById(R.id.cosmic_radiation_value);
-                cosmicTextView.setText(getString(R.string.additional_radiation_display, cosmicRadiation));
+                cosmicTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(cosmicRadiation, context)));
                 fragmentView.findViewById(R.id.cosmic_layout).setVisibility(View.VISIBLE);
 
                 Location nearestLocationOntable = HelperUtils.getNearestTabLocation(location);
@@ -230,7 +234,7 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
                 totalRads += terrestialRads;
 
                 TextView terrestialRadsTextView = (TextView) fragmentView.findViewById(R.id.terrestial_radiation_value);
-                terrestialRadsTextView.setText(getString(R.string.additional_radiation_display, terrestialRads));
+                terrestialRadsTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(terrestialRads, context)));
                 fragmentView.findViewById(R.id.terrestial_layout).setVisibility(View.VISIBLE);
 
                 // Get and set up Cosmogenic Atmospheric Radiation
@@ -238,7 +242,7 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
                 totalRads += cosmogenicRads;
 
                 TextView cosmogenicRadsTextView = (TextView) fragmentView.findViewById(R.id.cosmogenic_radiation_value);
-                cosmogenicRadsTextView.setText(getString(R.string.additional_radiation_display, cosmogenicRads));
+                cosmogenicRadsTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(cosmogenicRads, context)));
                 fragmentView.findViewById(R.id.cosmogenic_layout).setVisibility(View.VISIBLE);
 
                 // Get and set up Atmospheric Radiation through inhalation
@@ -246,7 +250,7 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
                 totalRads += inhalationRads;
 
                 TextView inhalationRadsTextView = (TextView) fragmentView.findViewById(R.id.inhalation_radiation_value);
-                inhalationRadsTextView.setText(getString(R.string.additional_radiation_display, inhalationRads));
+                inhalationRadsTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(inhalationRads, context)));
                 fragmentView.findViewById(R.id.inhalation_layout).setVisibility(View.VISIBLE);
 
                 // Get and set up Radiation due to food
@@ -254,7 +258,7 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
                 totalRads += ingestionRads;
 
                 TextView ingestionRadsTextView = (TextView) fragmentView.findViewById(R.id.ingestion_radiation_value);
-                ingestionRadsTextView.setText(getString(R.string.additional_radiation_display, ingestionRads));
+                ingestionRadsTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(ingestionRads, context)));
                 fragmentView.findViewById(R.id.ingestion_layout).setVisibility(View.VISIBLE);
 
                 if (totalLocationRadiation == 0d){

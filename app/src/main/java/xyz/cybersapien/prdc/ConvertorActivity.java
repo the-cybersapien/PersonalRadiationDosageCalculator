@@ -5,26 +5,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
-import butterknife.OnItemSelected;
 import xyz.cybersapien.prdc.helpers.ConvertUtils;
-import xyz.cybersapien.prdc.helpers.HelperUtils;
 
 public class ConvertorActivity extends AppCompatActivity {
 
@@ -171,7 +164,7 @@ public class ConvertorActivity extends AppCompatActivity {
                     converted = ConvertUtils.convertCoulombPerKg(fromVal, 100 + i);
                     break;
             }
-            vals.get(i).setText(getString(R.string.display_val, converted));
+            vals.get(i).setText(getString(R.string.convertor_display_val, converted));
         }
     }
 }

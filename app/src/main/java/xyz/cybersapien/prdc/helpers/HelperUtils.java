@@ -1,10 +1,12 @@
 package xyz.cybersapien.prdc.helpers;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -19,8 +21,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import xyz.cybersapien.prdc.BuildConfig;
+import xyz.cybersapien.prdc.R;
 
 /**
  * Created by cybersapien on 12/29/2016.
@@ -370,5 +374,21 @@ public class HelperUtils {
 
     public static Double getRadsByTravel(Double kilometres) {
         return kilometres * 1.609344 / 100;
+    }
+
+    public static String getPreferredValue(Double valInMicroSv, Context context){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String units = preferences.getString(context.getString(R.string.prefs_units_key), context.getString(R.string.pref_units_default));
+        Double val = 0d;
+        if (units.equals(context.getString(R.string.milli_rem))){
+            val = valInMicroSv * 0.1;
+        } else if (units.equals(context.getString(R.string.rem))){
+            val = valInMicroSv * 0.0001;
+        }  else if (units.equals(context.getString(R.string.sievert))){
+            val = valInMicroSv * ConvertUtils.MICRO;
+        } else {
+            val = valInMicroSv;
+        }
+        return context.getString(R.string.rads_formatter, val).concat(units);
     }
 }

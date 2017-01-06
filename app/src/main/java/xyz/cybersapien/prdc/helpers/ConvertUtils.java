@@ -128,4 +128,5 @@ public class ConvertUtils {
                 return Double.NaN;
         }
     }
+
 }

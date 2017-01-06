@@ -23,10 +23,39 @@
         <item>Nano</item>
     </string-array>
 
-    <string name="additional_radiation_display">+ %.2f µSv</string>
-    <string name="total_radiation_display"> %.2f µSv</string>
+    <string name="rads_formatter">%.3f</string>
+    <string name="additional_radiation_display">+ %s</string>
+    <string name="total_radiation_display"> %s</string>
 
-    <string name="display_val" formatted="false">%.5f%n</string>
+    <string name="convertor_display_val" formatted="false">%.5f%n</string>
     <string name="micro_sievert">µSv</string>
+    <string name="milli_rem">mRem</string>
+    <string name="sievert">Sv</string>
+    <string name="rem">rem</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <string name="pref_units_title" translatable="true">Units</string>
+    <string name="prefs_units_key" translatable="false">units</string>
+    <string name="prefs_units_dialog_title" translatable="true">Select Units</string>
+    <string name="pref_units_default" translatable="false">@string/micro_sievert</string>
+
+    <string name="prefs_units_milli_rem">milli_rem</string>
+    <string name="prefs_units_rem">rem</string>
+    <string name="prefs_units_micro_sievert">micro_sievert</string>
+    <string name="prefs_units_sievert">sievert</string>
+
+    <string-array name="pref_units_entries" transalatable="true">
+        <item>@string/milli_rem</item>
+        <item>@string/rem</item>
+        <item>@string/micro_sievert</item>
+        <item>@string/sievert</item>
+    </string-array>
+
+    <string-array name="pref_units_values" transalatable="false">
+        <item>@string/prefs_units_milli_rem</item>
+        <item>@string/prefs_units_rem</item>
+        <item>@string/prefs_units_micro_sievert</item>
+        <item>@string/prefs_units_sievert</item>
+    </string-array>
 
 </resources>

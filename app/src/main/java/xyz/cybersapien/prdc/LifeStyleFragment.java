@@ -1,5 +1,6 @@
 package xyz.cybersapien.prdc;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -33,6 +34,8 @@ public class LifeStyleFragment extends Fragment {
     private MainActivity containerActivity;
     private View containerView;
     private View medicalContainerView;
+
+    private Context context;
 
     // Total value and booleans for X-rays
     private double totalXRay;
@@ -78,6 +81,9 @@ public class LifeStyleFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setRetainInstance(true);
+
+        context = getContext();
+
         // Initialize xray data
         addedxRayData = false;
         xRaySkull = false;
@@ -130,7 +136,7 @@ public class LifeStyleFragment extends Fragment {
         if (!kmStrings.isEmpty()){
             Double kilometres = Double.valueOf(kmByJetsEditText.getText().toString());
             Double totalRads = HelperUtils.getRadsByTravel(kilometres);
-            radsByJetsTextView.setText(getString(R.string.additional_radiation_display, totalRads));
+            radsByJetsTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(totalRads, context)));
             radsByJetsTextView.setVisibility(View.VISIBLE);
 
             if (jetRadiation != totalRads){
@@ -150,7 +156,7 @@ public class LifeStyleFragment extends Fragment {
             Double packsPerDay = Double.valueOf(cigarettesEditText.getText().toString());
             Double totalRads = packsPerDay * 4.9;
 
-            radsByCigarettes.setText(getString(R.string.additional_radiation_display, totalRads));
+            radsByCigarettes.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(totalRads, context)));
             radsByCigarettes.setVisibility(View.VISIBLE);
 
             if (cigaretteRadiation != totalRads){
@@ -170,7 +176,7 @@ public class LifeStyleFragment extends Fragment {
                     if (luminousWatches == 0){
                         luminousWatches = 0.6;
                         containerActivity.addRads(luminousWatches);
-                        wristWatchRads.setText(getString(R.string.additional_radiation_display, luminousWatches));
+                        wristWatchRads.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(luminousWatches, context)));
                         wristWatchRads.setVisibility(View.VISIBLE);
                     }
                     break;
@@ -235,7 +241,7 @@ public class LifeStyleFragment extends Fragment {
                         TextView xRaySkullTextView = (TextView) medicalContainerView.findViewById(R.id.medical_xray_skull_rad_count);
                         if (isChecked){
                             xRaySkull = true;
-                            xRaySkullTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.XRAY_SKULL));
+                            xRaySkullTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.XRAY_SKULL, context)));
                             xRaySkullTextView.setVisibility(View.VISIBLE);
                         } else {
                             xRaySkull = false;
@@ -252,7 +258,7 @@ public class LifeStyleFragment extends Fragment {
                         TextView xRayChestTextView = (TextView)medicalContainerView.findViewById(R.id.medical_xray_chest_rad_count);
                         if (isChecked){
                             xRayChest = true;
-                            xRayChestTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.XRAY_CHEST));
+                            xRayChestTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.XRAY_CHEST, context)));
                             xRayChestTextView.setVisibility(View.VISIBLE);
                         } else {
                             xRayChest = false;
@@ -269,7 +275,7 @@ public class LifeStyleFragment extends Fragment {
                         TextView xRayThoracicSpineView =  (TextView) medicalContainerView.findViewById(R.id.medical_xray_thoracic_rad_count);
                         if (isChecked){
                             xRayTSpine = true;
-                            xRayThoracicSpineView.setText(getString(R.string.additional_radiation_display, HelperUtils.XRAY_THORACIC_SPINE));
+                            xRayThoracicSpineView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.XRAY_THORACIC_SPINE, context)));
                             xRayThoracicSpineView.setVisibility(View.VISIBLE);
                         } else {
                             xRayTSpine = false;
@@ -287,7 +293,7 @@ public class LifeStyleFragment extends Fragment {
 
                         if (isChecked){
                             xRayLSpine = true;
-                            xRayLumbarSpineView.setText(getString(R.string.additional_radiation_display, HelperUtils.XRAY_THORACIC_SPINE));
+                            xRayLumbarSpineView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.XRAY_THORACIC_SPINE, context)));
                             xRayLumbarSpineView.setVisibility(View.VISIBLE);
                         } else {
                             xRayLSpine = false;
@@ -304,7 +310,7 @@ public class LifeStyleFragment extends Fragment {
 
                         if (isChecked){
                             xRayAbdomen = false;
-                            xRayAbdomenTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.XRAY_ABDOMEN));
+                            xRayAbdomenTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.XRAY_ABDOMEN, context)));
                             xRayAbdomenTextView.setVisibility(View.VISIBLE);
                         } else {
                             xRayAbdomen = true;
@@ -322,7 +328,7 @@ public class LifeStyleFragment extends Fragment {
 
                         if (isChecked){
                             xRayPelvis = true;
-                            xRayPelvisTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.XRAY_PELVIS));
+                            xRayPelvisTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.XRAY_PELVIS, context)));
                             xRayPelvisTextView.setVisibility(View.VISIBLE);
                         } else {
                             xRayPelvis = false;
@@ -339,7 +345,7 @@ public class LifeStyleFragment extends Fragment {
 
                         if (isChecked){
                             xRayDental = true;
-                            xRayDentalTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.XRAY_DENTAL));
+                            xRayDentalTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.XRAY_DENTAL, context)));
                             xRayDentalTextView.setVisibility(View.VISIBLE);
                         } else {
                             xRayDental = false;
@@ -356,7 +362,7 @@ public class LifeStyleFragment extends Fragment {
 
                         if (isChecked){
                             xRayLimb = true;
-                            xRayLimbsTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.XRAY_LIMBS));
+                            xRayLimbsTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.XRAY_LIMBS, context)));
                             xRayLimbsTextView.setVisibility(View.VISIBLE);
                         } else {
                             xRayLimb = false;
@@ -388,7 +394,7 @@ public class LifeStyleFragment extends Fragment {
                             xRayTotal += HelperUtils.XRAY_LIMBS;
 
                         TextView xRayTotalTextView = (TextView) medicalContainerView.findViewById(R.id.xray_total_text_view);
-                        xRayTotalTextView.setText(getString(R.string.additional_radiation_display, xRayTotal));
+                        xRayTotalTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(xRayTotal, context)));
 
                         if (xRayTotal != totalXRay){
                             containerActivity.addRads(xRayTotal - totalXRay);
@@ -432,7 +438,7 @@ public class LifeStyleFragment extends Fragment {
                         TextView IVPTextView = (TextView) medicalContainerView.findViewById(R.id.medical_procedure_IVP_rad_count);
                         if (isChecked){
                             procedureIVP = true;
-                            IVPTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.PROCEDURE_IVP));
+                            IVPTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.PROCEDURE_IVP, context)));
                             IVPTextView.setVisibility(View.VISIBLE);
                         } else {
                             procedureIVP = false;
@@ -449,7 +455,7 @@ public class LifeStyleFragment extends Fragment {
 
                         if (isChecked){
                             procedureBariumSwallow = true;
-                            bariumSwallowTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.PROCEDURE_BARIUM_SWALLOW));
+                            bariumSwallowTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.PROCEDURE_BARIUM_SWALLOW, context)));
                             bariumSwallowTextView.setVisibility(View.VISIBLE);
                         } else {
                             procedureBariumSwallow = false;
@@ -466,7 +472,7 @@ public class LifeStyleFragment extends Fragment {
 
                         if (isChecked){
                             procedureBariumMeal = true;
-                            bariumMealTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.PROCEDURE_BARIUM_MEAL));
+                            bariumMealTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.PROCEDURE_BARIUM_MEAL, context)));
                             bariumMealTextView.setVisibility(View.VISIBLE);
                         } else {
                             procedureBariumMeal = false;
@@ -483,7 +489,7 @@ public class LifeStyleFragment extends Fragment {
 
                         if (isChecked){
                             procedureBariumFollowUp = true;
-                            bariumFollowUpTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.PROCEDURE_BARIUM_FOLLOW_UP));
+                            bariumFollowUpTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.PROCEDURE_BARIUM_FOLLOW_UP, context)));
                             bariumFollowUpTextView.setVisibility(View.VISIBLE);
                         } else {
                             procedureBariumFollowUp = false;
@@ -500,7 +506,7 @@ public class LifeStyleFragment extends Fragment {
 
                         if (isChecked){
                             procedureBariumEnema = true;
-                            bariumEnemaTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.PROCEDURE_BARIUM_ENEMA));
+                            bariumEnemaTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.PROCEDURE_BARIUM_ENEMA, context)));
                             bariumEnemaTextView.setVisibility(View.VISIBLE);
                         } else {
                             procedureBariumEnema = false;
@@ -517,7 +523,7 @@ public class LifeStyleFragment extends Fragment {
 
                         if (isChecked){
                             procedureCTHead = true;
-                            headCTScanTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.PROCEDURE_CT_HEAD));
+                            headCTScanTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.PROCEDURE_CT_HEAD, context)));
                             headCTScanTextView.setVisibility(View.VISIBLE);
                         } else {
                             procedureCTHead = false;
@@ -534,7 +540,7 @@ public class LifeStyleFragment extends Fragment {
 
                         if (isChecked){
                             procedureCTChest = true;
-                            chestCTScanTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.PROCEDURE_CT_CHEST));
+                            chestCTScanTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.PROCEDURE_CT_CHEST, context)));
                             chestCTScanTextView.setVisibility(View.VISIBLE);
                         } else {
                             procedureCTChest = false;
@@ -551,7 +557,7 @@ public class LifeStyleFragment extends Fragment {
 
                         if (isChecked){
                             procedureCTAbdomen = true;
-                            abdomenTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.PROCEDURE_CT_ABDOMEN));
+                            abdomenTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.PROCEDURE_CT_ABDOMEN, context)));
                             abdomenTextView.setVisibility(View.VISIBLE);
                         } else {
                             procedureCTAbdomen = false;
@@ -568,7 +574,7 @@ public class LifeStyleFragment extends Fragment {
 
                         if (isChecked){
                             procedureCTPelvis = true;
-                            pelvisTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.PROCEDURE_CT_PELVIS));
+                            pelvisTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.PROCEDURE_CT_PELVIS, context)));
                             pelvisTextView.setVisibility(View.VISIBLE);
                         } else {
                             procedureCTPelvis = false;
@@ -585,7 +591,7 @@ public class LifeStyleFragment extends Fragment {
 
                         if (isChecked){
                             procedurePTCA = true;
-                            PTCATextView.setText(getString(R.string.additional_radiation_display, HelperUtils.PROCEDURE_PTCA));
+                            PTCATextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.PROCEDURE_PTCA, context)));
                             PTCATextView.setVisibility(View.VISIBLE);
                         } else {
                             procedurePTCA = false;
@@ -602,7 +608,7 @@ public class LifeStyleFragment extends Fragment {
 
                         if (isChecked){
                             procedureCoronary = true;
-                            coronaryTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.PROCEDURE_CORONARY));
+                            coronaryTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.PROCEDURE_CORONARY, context)));
                             coronaryTextView.setVisibility(View.VISIBLE);
                         } else {
                             procedureCoronary = false;
@@ -619,7 +625,7 @@ public class LifeStyleFragment extends Fragment {
 
                         if (isChecked){
                             procedureMammogram = true;
-                            mammogramTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.PROCEDURE_MAMMOGRAM));
+                            mammogramTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.PROCEDURE_MAMMOGRAM, context)));
                             mammogramTextView.setVisibility(View.VISIBLE);
                         } else {
                             procedureMammogram = false;
@@ -659,7 +665,7 @@ public class LifeStyleFragment extends Fragment {
                             procedureTotal += HelperUtils.PROCEDURE_MAMMOGRAM;
 
                         TextView procedureTotalTextView = (TextView) medicalContainerView.findViewById(R.id.procedure_total_text_view);
-                        procedureTotalTextView.setText(getString(R.string.additional_radiation_display, procedureTotal));
+                        procedureTotalTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(procedureTotal, context)));
 
                         if (procedureTotal != totalProcedure){
                             containerActivity.addRads(procedureTotal - totalProcedure);
