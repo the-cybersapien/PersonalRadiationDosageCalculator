@@ -20,6 +20,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.rd.PageIndicatorView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.cybersapien.prdc.helpers.HelperUtils;
@@ -48,10 +50,13 @@ public class MainActivity extends AppCompatActivity {
     private LocationFragment locationFragment;
     private LifeStyleFragment lifeStyleFragment;
     private ResultsFragment resultsFragment;
+
+
     @BindView(R.id.fragment_container) ViewPager mViewPager;
 
     private PagerAdapter mPagerAdapter;
 
+    @BindView(R.id.pageIndicatorView) PageIndicatorView pageIndicatorView;
     @BindView(R.id.rads_explanation) TextView explanationTextView;
     @BindView(R.id.main_button_next) Button nextButton;
     @BindView(R.id.main_button_prev) Button prevButton;
@@ -74,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         mPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(pageChangeListener);
+        pageIndicatorView.setViewPager(mViewPager);
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
@@ -184,12 +190,12 @@ public class MainActivity extends AppCompatActivity {
                 mViewPager.setCurrentItem(1);
             }
         });
-        prevButton.setVisibility(View.GONE);
+        prevButton.setVisibility(View.INVISIBLE);
     }
 
     private void updateToLifestyleFragment(){
         explanationTextView.setText("SAMPLE EXPLANATION FOR LIFESTYLE");
-        nextButton.setText("NEXT");
+        nextButton.setText("FINISH");
         nextButton.setVisibility(View.VISIBLE);
         prevButton.setText("BACK");
         prevButton.setVisibility(View.VISIBLE);
@@ -209,9 +215,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateToResultsFragment(){
         explanationTextView.setText("");
-        nextButton.setVisibility(View.GONE);
+        nextButton.setVisibility(View.INVISIBLE);
         prevButton.setText("BACK");
         prevButton.setVisibility(View.VISIBLE);
+        explanationTextView.setVisibility(View.GONE);
         prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

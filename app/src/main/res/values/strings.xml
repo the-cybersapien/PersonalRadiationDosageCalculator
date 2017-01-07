@@ -23,7 +23,7 @@
         <item>Nano</item>
     </string-array>
 
-    <string name="rads_formatter">%.3f</string>
+    <string name="rads_formatter">%.2f</string>
     <string name="additional_radiation_display">+ %s</string>
     <string name="total_radiation_display"> %s</string>
 

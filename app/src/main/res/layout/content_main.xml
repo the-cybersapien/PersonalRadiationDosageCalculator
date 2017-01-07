@@ -31,6 +31,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         android:minHeight="?actionBarSize"
         android:layout_gravity="bottom"
         android:orientation="horizontal"
@@ -43,24 +44,55 @@
             android:text="PREVIOUS"
             style="@style/Buttons.Color.Green"/>
 
-        <TextView
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            style="@style/TextAppearance.AppCompat.Medium"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical|end"
-            android:text="Total Radiation: "/>
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:id="@+id/totalRadsTextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            tools:text="15"/>
+            <com.rd.PageIndicatorView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pageIndicatorView"
+                app:piv_viewPager="@id/fragment_container"
+                android:background="@color/colorPrimary"
+                app:piv_count="3"
+                app:piv_select="0"
+                app:piv_animationType="thinWorm"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/white"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical|end"
+                    android:text="Total Radiation: "
+                    android:id="@+id/textView2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorIcons"
+                    android:id="@+id/totalRadsTextView"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    tools:text="15"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <Button
             android:layout_width="wrap_content"
