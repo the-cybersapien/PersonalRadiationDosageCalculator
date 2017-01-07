@@ -4,6 +4,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -37,9 +43,14 @@ public class MainActivity extends AppCompatActivity {
     public static final String LIFESTYLE_FRAGMENT = "LIFESTYLE_FRAGMENT";
     public static final String RESULTS_FRAGMENT = "RESULT_FRAGMENT";
 
+    private static final int NUM_PAGES = 3;
+
     private LocationFragment locationFragment;
     private LifeStyleFragment lifeStyleFragment;
     private ResultsFragment resultsFragment;
+    @BindView(R.id.fragment_container) ViewPager mViewPager;
+
+    private PagerAdapter mPagerAdapter;
 
     @BindView(R.id.rads_explanation) TextView explanationTextView;
     @BindView(R.id.main_button_next) Button nextButton;
@@ -60,27 +71,30 @@ public class MainActivity extends AppCompatActivity {
         totalRads = 0d;
         updateRads();
 
+        mPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(mPagerAdapter);
+        mViewPager.addOnPageChangeListener(pageChangeListener);
+
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
-        // Check that the activity contains the fragment Container
-        // and that the activity isn't being restored from a previous state
-        // else there might be overlapping fragments
-        if (findViewById(R.id.fragment_container) != null && savedInstanceState == null) {
-
-            //Create a LocationFragment Fragment to be placed
-            locationFragment = new LocationFragment();
-
-            // Add the fragment to the container
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.fragment_container, locationFragment, LOCATION_FRAGMENT)
-                    .commit();
-        }
         if (!HelperUtils.isInternetConnected(this)){
             showInternetErrorDialog();
         }
 
-        initiateLocationFragment();
+        locationFragment = new LocationFragment();
+        lifeStyleFragment = new LifeStyleFragment();
+        resultsFragment = new ResultsFragment();
+
+        updateToLocationFragment();
+    }
+
+    @Override
+    public void onBackPressed(){
+        if (mViewPager.getCurrentItem() == 0){
+            super.onBackPressed();
+        } else {
+            mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
+        }
     }
 
 
@@ -142,27 +156,38 @@ public class MainActivity extends AppCompatActivity {
         netAlertBuilder.show();
     }
 
-    private void initiateLocationFragment(){
+    private ViewPager.SimpleOnPageChangeListener pageChangeListener = new ViewPager.SimpleOnPageChangeListener(){
+        @Override
+        public void onPageSelected(int position) {
+            switch (position){
+                case 0:
+                    updateToLocationFragment();
+                    break;
+                case 1:
+                    updateToLifestyleFragment();
+                    break;
+                case 2:
+                    updateToResultsFragment();
+                    break;
+            }
+            super.onPageSelected(position);
+        }
+    };
+
+    private void updateToLocationFragment(){
         nextButton.setText("NEXT");
         nextButton.setVisibility(View.VISIBLE);
         explanationTextView.setText("SAMPLE EXPLANATIONS FOR LOCATION");
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (lifeStyleFragment == null){
-                    lifeStyleFragment = new LifeStyleFragment();
-                }
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.fragment_container, lifeStyleFragment, LIFESTYLE_FRAGMENT)
-                        .addToBackStack(LIFESTYLE_FRAGMENT)
-                        .commit();
-                initiateLifeStyleFragment();
+                mViewPager.setCurrentItem(1);
             }
         });
         prevButton.setVisibility(View.GONE);
     }
 
-    private void initiateLifeStyleFragment(){
+    private void updateToLifestyleFragment(){
         explanationTextView.setText("SAMPLE EXPLANATION FOR LIFESTYLE");
         nextButton.setText("NEXT");
         nextButton.setVisibility(View.VISIBLE);
@@ -171,27 +196,18 @@ public class MainActivity extends AppCompatActivity {
         prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initiateLocationFragment();
                 onBackPressed();
             }
         });
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (resultsFragment == null){
-                    resultsFragment = new ResultsFragment();
-                }
-
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.fragment_container, resultsFragment, RESULTS_FRAGMENT)
-                        .addToBackStack(RESULTS_FRAGMENT)
-                        .commit();
-                intiateResultFragmnet();
+                mViewPager.setCurrentItem(2);
             }
         });
     }
 
-    private void intiateResultFragmnet(){
+    private void updateToResultsFragment(){
         explanationTextView.setText("");
         nextButton.setVisibility(View.GONE);
         prevButton.setText("BACK");
@@ -199,7 +215,6 @@ public class MainActivity extends AppCompatActivity {
         prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initiateLifeStyleFragment();
                 onBackPressed();
             }
         });
@@ -217,5 +232,37 @@ public class MainActivity extends AppCompatActivity {
                     locationFragment.showLocationErrorDialog();
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private class MainPagerAdapter extends FragmentStatePagerAdapter{
+
+        MainPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position){
+                case 0:
+                    return locationFragment;
+                case 1:
+                    return lifeStyleFragment;
+                case 2:
+                    return resultsFragment;
+                default:
+                    return null;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return NUM_PAGES;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            // HACK!! Do Nothing!!
+            // We don't want the Fragments to be destroyed, so, don't do anything!
+        }
     }
 }
