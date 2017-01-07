@@ -33,11 +33,15 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getName();
 
-    public static String LOCATION_FRAGMENT = "LOCATION_FRAGMENT";
+    public static final String LOCATION_FRAGMENT = "LOCATION_FRAGMENT";
     public static final String LIFESTYLE_FRAGMENT = "LIFESTYLE_FRAGMENT";
+    public static final String RESULTS_FRAGMENT = "RESULT_FRAGMENT";
 
     private LocationFragment locationFragment;
+    private LifeStyleFragment lifeStyleFragment;
+    private ResultsFragment resultsFragment;
 
+    @BindView(R.id.rads_explanation) TextView explanationTextView;
     @BindView(R.id.main_button_next) Button nextButton;
     @BindView(R.id.main_button_prev) Button prevButton;
 
@@ -76,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             showInternetErrorDialog();
         }
 
-        initiateWithLocationFragment();
+        initiateLocationFragment();
     }
 
 
@@ -138,32 +142,64 @@ public class MainActivity extends AppCompatActivity {
         netAlertBuilder.show();
     }
 
-    private void initiateWithLocationFragment(){
+    private void initiateLocationFragment(){
         nextButton.setText("NEXT");
         nextButton.setVisibility(View.VISIBLE);
+        explanationTextView.setText("SAMPLE EXPLANATIONS FOR LOCATION");
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LifeStyleFragment lf = new LifeStyleFragment();
-
+                if (lifeStyleFragment == null){
+                    lifeStyleFragment = new LifeStyleFragment();
+                }
                 getSupportFragmentManager().beginTransaction()
-                        .add(R.id.fragment_container, lf, LIFESTYLE_FRAGMENT)
+                        .add(R.id.fragment_container, lifeStyleFragment, LIFESTYLE_FRAGMENT)
                         .addToBackStack(LIFESTYLE_FRAGMENT)
                         .commit();
-                initiateWithLifeStyleFragment();
+                initiateLifeStyleFragment();
             }
         });
         prevButton.setVisibility(View.GONE);
     }
 
-    private void initiateWithLifeStyleFragment(){
-        nextButton.setVisibility(View.GONE);
-        prevButton.setText("PREVIOUS");
+    private void initiateLifeStyleFragment(){
+        explanationTextView.setText("SAMPLE EXPLANATION FOR LIFESTYLE");
+        nextButton.setText("NEXT");
+        nextButton.setVisibility(View.VISIBLE);
+        prevButton.setText("BACK");
         prevButton.setVisibility(View.VISIBLE);
         prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initiateWithLocationFragment();
+                initiateLocationFragment();
+                onBackPressed();
+            }
+        });
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (resultsFragment == null){
+                    resultsFragment = new ResultsFragment();
+                }
+
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.fragment_container, resultsFragment, RESULTS_FRAGMENT)
+                        .addToBackStack(RESULTS_FRAGMENT)
+                        .commit();
+                intiateResultFragmnet();
+            }
+        });
+    }
+
+    private void intiateResultFragmnet(){
+        explanationTextView.setText("");
+        nextButton.setVisibility(View.GONE);
+        prevButton.setText("BACK");
+        prevButton.setVisibility(View.VISIBLE);
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initiateLifeStyleFragment();
                 onBackPressed();
             }
         });

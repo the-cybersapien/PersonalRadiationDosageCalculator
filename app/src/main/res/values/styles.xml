@@ -56,9 +56,8 @@
     </style>
 
     <style name="Buttons.Color.Green" parent="Widget.AppCompat.Button.Colored">
-        <item name="android:colorAccent" tools:targetApi="lollipop">@color/colorMaterialGreen500</item>
-        <item name="android:colorButtonNormal" tools:targetApi="lollipop">@color/colorMaterialGreen500</item>
-        <item name="colorButtonNormal">@color/colorMaterialGreen500</item>
+        <item name="background">@color/colorMaterialGreen500</item>
+        <item name="android:background">@color/colorMaterialGreen500</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
