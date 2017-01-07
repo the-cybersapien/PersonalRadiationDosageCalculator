@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
     public static String LOCATION_FRAGMENT = "LOCATION_FRAGMENT";
     public static final String LIFESTYLE_FRAGMENT = "LIFESTYLE_FRAGMENT";
 
-    @BindView(R.id.main_button_next) TextView nextButton;
-    @BindView(R.id.main_button_prev) TextView prevButton;
+    private LocationFragment locationFragment;
+
+    @BindView(R.id.main_button_next) Button nextButton;
+    @BindView(R.id.main_button_prev) Button prevButton;
 
     private Double totalRads;
 
@@ -61,12 +64,12 @@ public class MainActivity extends AppCompatActivity {
         if (findViewById(R.id.fragment_container) != null && savedInstanceState == null) {
 
             //Create a LocationFragment Fragment to be placed
-            LocationFragment firstFragment = new LocationFragment();
+            locationFragment = new LocationFragment();
 
             // Add the fragment to the container
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.fragment_container, firstFragment, LOCATION_FRAGMENT)
+                    .add(R.id.fragment_container, locationFragment, LOCATION_FRAGMENT)
                     .commit();
         }
         if (!HelperUtils.isInternetConnected(this)){
@@ -164,5 +167,19 @@ public class MainActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        Log.d(LOG_TAG, "onActivityResult: " + requestCode + " " + resultCode);
+        switch (requestCode){
+            case 1000:
+                if (resultCode == RESULT_OK)
+                    locationFragment.onConnected(null);
+                else
+                    locationFragment.showLocationErrorDialog();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

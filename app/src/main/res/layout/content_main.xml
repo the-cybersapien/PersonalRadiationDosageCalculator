@@ -16,8 +16,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:background="@color/cardview_light_background"
-            android:text="SAMPLE EXPLAINATION TEXT FOR LOCATION/LIFESTYLE"
-            android:id="@+id/rads_explaination"
+            android:text="SAMPLE EXPLANATION TEXT FOR LOCATION/LIFESTYLE"
+            android:id="@+id/rads_explanation"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
     </android.support.v7.widget.CardView>
@@ -38,22 +38,17 @@
         android:orientation="horizontal"
         >
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/main_button_prev"
             android:text="PREVIOUS"
-            android:layout_gravity="center_vertical"
-            android:gravity="center"
-            android:background="#00e676"
-            android:padding="5dp"
-            android:textColor="#212121"/>
+            style="@style/Buttons.Color.Green"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical|end"
             android:text="Total Radiation: "/>
@@ -68,17 +63,12 @@
             android:paddingRight="10dp"
             tools:text="15"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/main_button_next"
             android:text="NEXT"
-            android:layout_gravity="center_vertical"
-            android:gravity="center"
-            android:background="#00e676"
-            android:padding="5dp"
-            android:textColor="#212121"/>
+            style="@style/Buttons.Color.Green"/>
     </LinearLayout>
 
 </LinearLayout>

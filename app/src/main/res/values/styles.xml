@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -47,4 +47,21 @@
         <item name="android:textSize">22sp</item>
         <item name="android:gravity">bottom</item>
     </style>
+
+    <style name="Buttons.Colored" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:colorAccent" tools:targetApi="lollipop">@color/colorAccent</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="Buttons.Color.Green" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:colorAccent" tools:targetApi="lollipop">@color/colorMaterialGreen500</item>
+        <item name="android:colorButtonNormal" tools:targetApi="lollipop">@color/colorMaterialGreen500</item>
+        <item name="colorButtonNormal">@color/colorMaterialGreen500</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
 </resources>

@@ -201,6 +201,7 @@ public class LifeStyleFragment extends Fragment {
             switch (checkedId){
                 case R.id.medical_choice_yes_button:
                     medicalContainerView = layoutInflater.inflate(R.layout.medical_procedures_card, null);
+                    containmentView.setVisibility(View.VISIBLE);
                     containmentView.addView(medicalContainerView);
 
                     CheckBox xrayCheckBox = (CheckBox) medicalContainerView.findViewById(R.id.medical_check_xray);
@@ -209,6 +210,7 @@ public class LifeStyleFragment extends Fragment {
                     procedureCheckBox.setOnCheckedChangeListener(procedureChangeListener);
                     break;
                 case R.id.medical_choice_no_button:
+                    containmentView.setVisibility(View.GONE);
                     containmentView.removeAllViews();
                     if (totalProcedure != 0 && totalXRay != 0){
                         containerActivity.addRads(0 - totalProcedure - totalXRay);
@@ -309,11 +311,11 @@ public class LifeStyleFragment extends Fragment {
                         TextView xRayAbdomenTextView = (TextView) medicalContainerView.findViewById(R.id.medical_xray_abdomen_rad_count);
 
                         if (isChecked){
-                            xRayAbdomen = false;
+                            xRayAbdomen = true;
                             xRayAbdomenTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(HelperUtils.XRAY_ABDOMEN, context)));
                             xRayAbdomenTextView.setVisibility(View.VISIBLE);
                         } else {
-                            xRayAbdomen = true;
+                            xRayAbdomen = false;
                             xRayAbdomenTextView.setVisibility(View.GONE);
                         }
                     }

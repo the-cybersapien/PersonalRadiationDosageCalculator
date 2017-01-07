@@ -208,6 +208,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_xray_total_button"
+                    style="@style/Buttons.Colored"
                     android:text="Find Total"/>
 
                 <TextView
@@ -497,6 +498,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_procedure_total_button"
+                    style="@style/Buttons.Colored"
                     android:text="Find Total"/>
 
                 <TextView
