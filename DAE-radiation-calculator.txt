@@ -1,0 +1,83 @@
+Dear Aditya,
+
+It is nice to know that you(and the team) are working on the problem "Personal radiation
+dosage calculator" of Dept. of Atomic Energy.
+
+Before going to sample data issue, I would like to know how you are
+approaching the problem. If you have prepared a document outlining the
+technical details, I would be happy to go through it.
+
+If you wish, you can use some dummy values at the moment which we can
+tweak later on.
+
+With regard to program code requirement, you can write an small code that will allow conversion from one radiation unit(grey,sievert) to another. e.g.
+https://www.remm.nlm.gov/radmeasurement.htm
+
+Personal radiation dosage calculator
+-------------------------------------
+As stated, the aim of the application is to educate the Indian public and create awareness about the nuclear technology.
+Please find below some links that will be useful during the application development.
+
+Indian perspective - radiation figures related to India -
+-----------------------------------------------------------
+1) Many presentations on NPCIL sites - http://npcil.nic.in/main/know_about_radiation.aspx 
+2) http://www.ijrr.com/article-1-738-en.pdf
+3) NPCIL presentation - http://www.npcil.nic.in/pdf/Radiation_background_Natural_and_Manmade.pdf
+4) http://npcil.nic.in/pdf/Radiation_in_NPP_environs.pdf
+5) http://www.thehindu.com/sci-tech/agriculture/background-radiation-and-radioactivity-in-india/article1991190.ece
+
+Please find below some more links that might be of interest:
+
+Radiation data in selected cities - http://www.aerb.gov.in/AERBPortal/pages/English/t/prsrel/IERMON29072011MN.pdf
+
+Though the data is old (year - 2011), you have to design the application in such a way that such data can be imported on demand.
+
+1) http://dae.nic.in/?q=node/304
+2) http://www.aerb.gov.in/AERBPortal/pages/English/incident/iermon_jsp.action
+3) http://www.barc.gov.in/pubaware/enr.html
+4) http://barc.gov.in/pubaware/enr_n1.html
+5) http://www.nuclearconnect.org/know-nuclear/talking-nuclear/top-10-myths-about-nuclear-energy
+
+-Joshi P S
+Some useful material related to radiation, dosage etc:
+---------------------------------------------------------
+Radiation converter - https://m.downloadatoz.com/radiation-unit-converter/appinventor.ai_et2jones.RadiationUnitconvertor/
+Radiation emergency training - https://emergency.cdc.gov/radiation/training.asp
+Radiation basics - https://emergency.cdc.gov/radiation/radbasics.asp
+Radiation education activities - https://www3.epa.gov/radtown/educational-materials.html
+Average Dose (NRC,USA) - http://www.nrc.gov/reading-rm/basic-ref/students/for-educators/average-dose-worksheet.pdf
+Radiation protection measures - https://www.nrc.gov/reading-rm/basic-ref/students/for-educators/08.pdf
+EPA,USA radiation sources and doses - https://www.epa.gov/radiation/radiation-sources-and-doses
+
+Radiation exposure limits - https://www.nde-ed.org/EducationResources/CommunityCollege/RadiationSafety/safe_use/exposure.htm
+Radiation doses(Canada NRC) - http://nuclearsafety.gc.ca/eng/resources/radiation/introduction-to-radiation/radiation-doses.cfm
+Radiation phobia - http://thewire.in/57029/radiation-lnt-hypothesis-phobia/
+Dose scale - https://www.pref.miyagi.jp/kankou/en/20130502e.pdf
+Radiation dose chart - https://xkcd.com/radiation/
+
+
+International Atomic Energy reports(IAEA) reports - 
+1) http://www.iaea.org/inis/collection/NCLCollectionStore/_Public/20/084/20084715.pdf
+2) http://www.iaea.org/inis/collection/NCLCollectionStore/_Public/25/014/25014709.pdf
+
+http://www.world-nuclear.org/uploadedFiles/org/Features/Radiation/4_Background_Radiation(1).pdf
+http://www.doh.wa.gov/portals/1/Documents/Pubs/320-063_bkvsman_fs.pdf
+http://www.ansto.gov.au/__data/assets/pdf_file/0017/45314/Ionising_Rad_broch_lr.pdf
+http://www.solarstorms.org/WorldNuclear.html
+
+http://www.pureearth.org/blog/radiation-101-what-is-it-how-much-is-dangerous-and-how-does-fukushima-compare-to-chernobyl/
+
+
+United states Nuclear Regulatory commission calculator - http://www.nrc.gov/about-nrc/radiation/around-us/calculator.html
+United States Environmental Protection Agency(EPA) - https://www.epa.gov/radiation/calculate-your-radiation-dose#self
+
+Also, you can visit site(s) for more information:
+1) http://aerb.gov.in
+2) http://www.barc.gov.in/pubaware/snr_rpo.html
+3) http://www.drdo.gov.in/drdo/labs/INMAS/collaboration/Radiation_Protection_Manual.pdf
+4) https://www.mcgill.ca/ehs/laboratory/radiation/manual/3
+
+If you need to help, please do not hesitate to communicate.
+
+regards,
+-Joshi
