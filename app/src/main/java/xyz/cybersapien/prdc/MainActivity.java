@@ -24,7 +24,8 @@ import com.rd.PageIndicatorView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import xyz.cybersapien.prdc.helpers.HelperUtils;
+import xyz.cybersapien.prdc.fragments.*;
+import xyz.cybersapien.prdc.helpers.*;
 
 /**
  * The App uses the values location based exposure from an Article by
@@ -37,7 +38,7 @@ import xyz.cybersapien.prdc.helpers.HelperUtils;
  *
  * http://www.nrc.gov/reading-rm/basic-ref/students/for-educators/average-dose-worksheet.pdf
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements UpdateUI {
 
     private static final String LOG_TAG = MainActivity.class.getName();
 
@@ -53,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     @BindView(R.id.fragment_container) ViewPager mViewPager;
-
-    private PagerAdapter mPagerAdapter;
 
     @BindView(R.id.pageIndicatorView) PageIndicatorView pageIndicatorView;
     @BindView(R.id.rads_explanation) TextView explanationTextView;
@@ -76,9 +75,26 @@ public class MainActivity extends AppCompatActivity {
         totalRads = 0d;
         updateRads();
 
-        mPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
+        PagerAdapter mPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
-        mViewPager.addOnPageChangeListener(pageChangeListener);
+        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+            @Override
+            public void onPageSelected(int position) {
+                switch (position){
+                    case 0:
+                        updateToLocationFragment();
+                        break;
+                    case 1:
+                        updateToLifestyleFragment();
+                        break;
+                    case 2:
+                        updateToResultsFragment();
+                        break;
+                }
+                super.onPageSelected(position);
+            }
+        });
+
         pageIndicatorView.setViewPager(mViewPager);
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
@@ -132,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
      * Public method to let other activities to update the total radiation tally in the Calculator.
      * @param rads the amount of radiation to be added
      */
+    @Override
     public void addRads(Double rads) {
         this.totalRads += rads;
         updateRads();
@@ -145,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
         total.setText(getString(R.string.total_radiation_display, HelperUtils.getPreferredValue(totalRads, this)));
     }
 
+    @Override
     public void showInternetErrorDialog(){
 
         AlertDialog.Builder netAlertBuilder = new AlertDialog.Builder(this);
@@ -152,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
         netAlertBuilder
                 .setMessage("Error! Please Check Internet Connection!")
                 .setTitle("No! Internet")
-                .setNegativeButton("Exit Application", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         MainActivity.this.finish();
@@ -162,27 +180,15 @@ public class MainActivity extends AppCompatActivity {
         netAlertBuilder.show();
     }
 
-    private ViewPager.SimpleOnPageChangeListener pageChangeListener = new ViewPager.SimpleOnPageChangeListener(){
-        @Override
-        public void onPageSelected(int position) {
-            switch (position){
-                case 0:
-                    updateToLocationFragment();
-                    break;
-                case 1:
-                    updateToLifestyleFragment();
-                    break;
-                case 2:
-                    updateToResultsFragment();
-                    break;
-            }
-            super.onPageSelected(position);
-        }
-    };
+    @Override
+    public Double getTotalRads() {
+        return totalRads;
+    }
 
     private void updateToLocationFragment(){
         nextButton.setText("NEXT");
         nextButton.setVisibility(View.VISIBLE);
+        explanationTextView.setVisibility(View.VISIBLE);
         explanationTextView.setText("SAMPLE EXPLANATIONS FOR LOCATION");
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateToLifestyleFragment(){
+        explanationTextView.setVisibility(View.VISIBLE);
         explanationTextView.setText("SAMPLE EXPLANATION FOR LIFESTYLE");
         nextButton.setText("FINISH");
         nextButton.setVisibility(View.VISIBLE);
@@ -215,10 +222,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateToResultsFragment(){
         explanationTextView.setText("");
+        explanationTextView.setVisibility(View.GONE);
         nextButton.setVisibility(View.INVISIBLE);
         prevButton.setText("BACK");
         prevButton.setVisibility(View.VISIBLE);
-        explanationTextView.setVisibility(View.GONE);
         prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

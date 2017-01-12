@@ -1,4 +1,8 @@
-package xyz.cybersapien.prdc;
+package xyz.cybersapien.prdc.fragments;
+
+
+import xyz.cybersapien.prdc.*;
+import xyz.cybersapien.prdc.helpers.*;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,7 +20,6 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import xyz.cybersapien.prdc.helpers.HelperUtils;
 
 public class LifeStyleFragment extends Fragment {
 
@@ -31,7 +34,7 @@ public class LifeStyleFragment extends Fragment {
     @BindView(R.id.wristwatch_rads) TextView wristWatchRads;
 
     private LayoutInflater layoutInflater;
-    private MainActivity containerActivity;
+    private UpdateUI updateUI;
     private View containerView;
     private View medicalContainerView;
 
@@ -117,7 +120,7 @@ public class LifeStyleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        containerActivity = (MainActivity) getActivity();
+        updateUI = (UpdateUI) getActivity();
         // Inflate the layout for this fragment
         containerView = inflater.inflate(R.layout.fragment_lifestyle, container, false);
         layoutInflater = inflater;
@@ -140,7 +143,7 @@ public class LifeStyleFragment extends Fragment {
             radsByJetsTextView.setVisibility(View.VISIBLE);
 
             if (jetRadiation != totalRads){
-                containerActivity.addRads(totalRads - jetRadiation);
+                updateUI.addRads(totalRads - jetRadiation);
                 jetRadiation = totalRads;
             }
 
@@ -160,7 +163,7 @@ public class LifeStyleFragment extends Fragment {
             radsByCigarettes.setVisibility(View.VISIBLE);
 
             if (cigaretteRadiation != totalRads){
-                containerActivity.addRads(totalRads - cigaretteRadiation);
+                updateUI.addRads(totalRads - cigaretteRadiation);
                 cigaretteRadiation = totalRads;
             }
             if (cigaretteRadiation == 0)
@@ -175,14 +178,14 @@ public class LifeStyleFragment extends Fragment {
                 case R.id.wristwatch_yes:
                     if (luminousWatches == 0){
                         luminousWatches = 0.6;
-                        containerActivity.addRads(luminousWatches);
+                        updateUI.addRads(luminousWatches);
                         wristWatchRads.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(luminousWatches, context)));
                         wristWatchRads.setVisibility(View.VISIBLE);
                     }
                     break;
                 case R.id.wristwatch_no:
                     if (luminousWatches != 0){
-                        containerActivity.addRads(-luminousWatches);
+                        updateUI.addRads(-luminousWatches);
                         luminousWatches = 0;
                         wristWatchRads.setVisibility(View.GONE);
                     }
@@ -213,7 +216,7 @@ public class LifeStyleFragment extends Fragment {
                     containmentView.setVisibility(View.GONE);
                     containmentView.removeAllViews();
                     if (totalProcedure != 0 && totalXRay != 0){
-                        containerActivity.addRads(0 - totalProcedure - totalXRay);
+                        updateUI.addRads(0 - totalProcedure - totalXRay);
                         totalXRay = 0;
                         totalProcedure = 0;
                     }
@@ -399,7 +402,7 @@ public class LifeStyleFragment extends Fragment {
                         xRayTotalTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(xRayTotal, context)));
 
                         if (xRayTotal != totalXRay){
-                            containerActivity.addRads(xRayTotal - totalXRay);
+                            updateUI.addRads(xRayTotal - totalXRay);
                             addedxRayData = true;
                             totalXRay = xRayTotal;
                         }
@@ -407,12 +410,12 @@ public class LifeStyleFragment extends Fragment {
                 });
 
                 if (addedxRayData){
-                    containerActivity.addRads(totalXRay);
+                    updateUI.addRads(totalXRay);
                 }
             } else {
                 medicalContainerView.findViewById(R.id.medical_xray_container).setVisibility(View.GONE);
                 if (addedxRayData){
-                    containerActivity.addRads(-1 * totalXRay);
+                    updateUI.addRads(-1 * totalXRay);
                 }
                 totalXRay = 0;
             }
@@ -670,7 +673,7 @@ public class LifeStyleFragment extends Fragment {
                         procedureTotalTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(procedureTotal, context)));
 
                         if (procedureTotal != totalProcedure){
-                            containerActivity.addRads(procedureTotal - totalProcedure);
+                            updateUI.addRads(procedureTotal - totalProcedure);
                             addedProcedureData = true;
                             totalProcedure = procedureTotal;
                         }
@@ -678,13 +681,13 @@ public class LifeStyleFragment extends Fragment {
                 });
 
                 if (addedProcedureData){
-                    containerActivity.addRads(totalProcedure);
+                    updateUI.addRads(totalProcedure);
                 }
             } else {
 
                 medicalContainerView.findViewById(R.id.medical_procedure_container).setVisibility(View.GONE);
                 if (addedProcedureData){
-                    containerActivity.addRads(-1 * totalProcedure);
+                    updateUI.addRads(-1 * totalProcedure);
                 }
                 totalProcedure = 0;
             }

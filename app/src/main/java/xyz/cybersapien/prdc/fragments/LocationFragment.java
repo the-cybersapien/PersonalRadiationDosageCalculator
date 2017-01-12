@@ -1,4 +1,7 @@
-package xyz.cybersapien.prdc;
+package xyz.cybersapien.prdc.fragments;
+
+import xyz.cybersapien.prdc.helpers.*;
+import xyz.cybersapien.prdc.*;
 
 import android.Manifest;
 import android.content.Context;
@@ -22,7 +25,6 @@ import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import butterknife.ButterKnife;
-import xyz.cybersapien.prdc.helpers.*;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -55,7 +57,7 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
     private double altitude;
     private Double totalLocationRadiation;
     private String address;
-    private MainActivity containerActivity;
+    private UpdateUI updateUI;
 
     private double residenceRadiation;
 
@@ -98,14 +100,14 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
                     case R.id.radioYes:
                         if (residenceRadiation == 0){
                             residenceRadiation = HelperUtils.RESIDENT_MATERIAL_RADIATION;
-                            containerActivity.addRads(residenceRadiation);
+                            updateUI.addRads(residenceRadiation);
                             radsTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(residenceRadiation, context)));
                             radsTextView.setVisibility(View.VISIBLE);
                         }
                         break;
                     case R.id.radioNo:
                         if (residenceRadiation == HelperUtils.RESIDENT_MATERIAL_RADIATION){
-                            containerActivity.addRads(-residenceRadiation);
+                            updateUI.addRads(-residenceRadiation);
                             residenceRadiation = 0;
                             radsTextView.setVisibility(View.GONE);
                         }
@@ -134,7 +136,7 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
                     .addApi(LocationServices.API)
                     .build();
         }
-        containerActivity = (MainActivity) getActivity();
+        updateUI = (UpdateUI) getActivity();
         super.onCreate(savedInstanceState);
     }
 
@@ -269,15 +271,24 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
 
         @Override
         protected Double doInBackground(Location... params) {
-            if (!HelperUtils.isInternetConnected(getContext())){
-                ((MainActivity)getActivity()).showInternetErrorDialog();
-            } else {
-                try {
-                    return HelperUtils.getAltitude(params[0]);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+
+            // Check that the Location is not null, else return 0
+            if (params.length < 1 || params[0] == null){
+                return 0d;
             }
+
+            // Check the Internet Connection
+            if (!HelperUtils.isInternetConnected(getContext())){
+                updateUI.showInternetErrorDialog();
+                this.cancel(true);
+            }
+
+            try {
+                return HelperUtils.getAltitude(params[0]);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             return 0d;
         }
 
@@ -330,9 +341,9 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
                 fragmentView.findViewById(R.id.ingestion_layout).setVisibility(View.VISIBLE);
 
                 if (totalLocationRadiation == 0d){
-                    containerActivity.addRads(totalRads);
+                    updateUI.addRads(totalRads);
                 } else {
-                    containerActivity.addRads(totalRads - totalLocationRadiation);
+                    updateUI.addRads(totalRads - totalLocationRadiation);
                 }
                 totalLocationRadiation = totalRads;
             }
@@ -343,10 +354,17 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
 
         @Override
         protected Location doInBackground(String... params) {
-            if (!HelperUtils.isInternetConnected(getContext())){
-                ((MainActivity)getActivity()).showInternetErrorDialog();
+            // Check to ensure that there is an address to get a location from
+            if (params.length < 1 || params[0] == null){
                 return null;
             }
+
+            // Check the Internet connection
+            if (!HelperUtils.isInternetConnected(getContext())){
+                updateUI.showInternetErrorDialog();
+                return null;
+            }
+
             return HelperUtils.getLocationFromAddress(params[0]);
         }
 
@@ -363,8 +381,14 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
 
         @Override
         protected String doInBackground(Location... params) {
+            // Check to ensure that there is a location to get an address from
+            if (params.length < 1 || params[0] == null){
+                return null;
+            }
+
+            // Check the internet connection
             if (!HelperUtils.isInternetConnected(getContext())){
-                ((MainActivity)getActivity()).showInternetErrorDialog();
+                updateUI.showInternetErrorDialog();
                 return null;
             }
             return HelperUtils.getAddressFromLocation(params[0]);

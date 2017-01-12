@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cardview_light_background"
-    tools:context="xyz.cybersapien.prdc.ResultsFragment">
+    tools:context="xyz.cybersapien.prdc.fragments.ResultsFragment">
 
     <TextView
         android:layout_width="match_parent"
