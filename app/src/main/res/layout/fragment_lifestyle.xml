@@ -1,211 +1,275 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.nirhart.parallaxscroll.views.ParallaxScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E8E8E8"
-    tools:context=".fragments.LifeStyleFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#BDBDBD"
+    tools:context="fragments.LifeStyleFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/activity_vertical_margin">
+        android:background="#000000">
 
-        <android.support.v7.widget.CardView
-            style="@style/CardView.Base">
+        <ImageView
+            android:id="@+id/bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/background2" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/where_you_live"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="80dp"
+            android:text="Lifestyle"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="130dp">
+
+            <android.support.v7.widget.CardView
+                style="@style/CardView.Base"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
                 android:padding="5dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/TextAppearance.Question"
-                    android:text="Have you had a medical Exam or procedure, like X-ray, in the last 12 months?"/>
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:id="@+id/medical_choice_radio_group">
-
-                    <RadioButton
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Yes"
-                        android:id="@+id/medical_choice_yes_button"/>
-
-                    <RadioButton
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="No"
-                        android:id="@+id/medical_choice_no_button"/>
-
-                </RadioGroup>
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <!-- Keeping medical Procedures separate and inflating them dynamically when needed to enhance performance-->
-        <android.support.v7.widget.CardView
-            style="@style/CardView.Base"
-            android:visibility="gone"
-            android:id="@+id/procedures_container">
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            style="@style/CardView.Base">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/TextAppearance.Question"
-                    android:text="How many kilometres on average per year do you travel by jet?"/>
+                app:cardBackgroundColor="#2d7588"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/kilometres_by_jet_edit_text"
-                        android:inputType="number"/>
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/calculate_rads_by_jet"
-                        style="@style/Buttons.Colored"
-                        android:text="Calculate"/>
+                    android:padding="5dp"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        style="@style/TextAppearance.AddRadiation"
-                        android:id="@+id/rad_by_jet"
-                        tools:text="+33"/>
+                        style="@style/TextAppearance.Question"
+                        android:textColor="#FFFFFF"
+                        android:text="Have you had a medical Exam or procedure, like X-ray, in the last 12 months?"/>
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/medical_choice_radio_group">
+
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:textColor="#FFFFFF"
+                            android:layout_height="wrap_content"
+                            android:text="Yes"
+                            android:id="@+id/medical_choice_yes_button"/>
+
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:textColor="#FFFFFF"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:id="@+id/medical_choice_no_button"/>
+
+                    </RadioGroup>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-        </android.support.v7.widget.CardView>
+            <!-- Keeping medical Procedures separate and inflating them dynamically when needed to enhance performance-->
+            <android.support.v7.widget.CardView
+                style="@style/CardView.Base"
+                app:cardElevation="60dp"
+                android:visibility="gone"
+                android:id="@+id/procedures_container">
 
-        <android.support.v7.widget.CardView
-            style="@style/CardView.Base">
+            </android.support.v7.widget.CardView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <android.support.v7.widget.CardView
+                style="@style/CardView.Base"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:padding="5dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/TextAppearance.Question"
-                    android:text="How many packs of cigarettes do you smoke per DAY?"/>
+                app:cardBackgroundColor="#2d7588"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/cigarette_packs_edit_text"
-                        android:inputType="number"/>
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/calculate_rads_by_cigarette"
-                        android:text="Calculate"
-                        android:theme="@style/Buttons.Colored"
-                        style="@style/Buttons.Colored"/>
+                    android:padding="5dp"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        style="@style/TextAppearance.AddRadiation"
-                        android:id="@+id/rads_by_cigarette"
-                        tools:text="+33"/>
+                        style="@style/TextAppearance.Question"
+                        android:textColor="#FFFFFF"
+                        android:text="How many kilometres on average per year do you travel by jet?"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="#FFFFFF"
+                            android:id="@+id/kilometres_by_jet_edit_text"
+                            android:inputType="number"/>
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/calculate_rads_by_jet"
+                            style="@style/Buttons.Colored"
+                            android:text="Calculate"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            style="@style/TextAppearance.AddRadiation"
+                            android:id="@+id/rad_by_jet"
+                            tools:text="+33"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            style="@style/CardView.Base">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <android.support.v7.widget.CardView
+                style="@style/CardView.Base"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:cardBackgroundColor="#2d7588"
                 android:padding="5dp"
-                android:orientation="vertical">
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/TextAppearance.Question"
-                    android:text="Do you wear a luminous Wristwatch?"/>
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:id="@+id/wristwatch_group">
-
-                    <RadioButton
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Yes"
-                        android:id="@+id/wristwatch_yes"/>
-
-                    <RadioButton
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="No"
-                        android:id="@+id/wristwatch_no"/>
+                    android:padding="5dp"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/wristwatch_rads"
-                        style="@style/TextAppearance.AddRadiation"
-                        android:visibility="gone"
-                        tools:text="451"/>
+                        style="@style/TextAppearance.Question"
+                        android:textColor="#FFFFFF"
+                        android:text="How many packs of cigarettes do you smoke per DAY?"/>
 
-                </RadioGroup>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-            </LinearLayout>
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="#FFFFFF"
+                            android:id="@+id/cigarette_packs_edit_text"
+                            android:inputType="number"/>
 
-        </android.support.v7.widget.CardView>
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/calculate_rads_by_cigarette"
+                            android:text="Calculate"
+                            android:theme="@style/Buttons.Colored"
+                            style="@style/Buttons.Colored"/>
 
-    </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            style="@style/TextAppearance.AddRadiation"
+                            android:id="@+id/rads_by_cigarette"
+                            tools:text="+33"/>
 
-</ScrollView>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                style="@style/CardView.Base"
+                android:padding="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:cardBackgroundColor="#2d7588"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/TextAppearance.Question"
+                        android:textColor="#FFFFFF"
+                        android:text="Do you wear a luminous Wristwatch?"/>
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/wristwatch_group">
+
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="Yes"
+                            android:textColor="#FFFFFF"
+                            android:id="@+id/wristwatch_yes"/>
+
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="No"
+                            android:textColor="#FFFFFF"
+                            android:id="@+id/wristwatch_no"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/wristwatch_rads"
+                            style="@style/TextAppearance.AddRadiation"
+                            android:visibility="gone"
+                            android:textColor="#FFFFFF"
+                            tools:text="451"/>
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </RelativeLayout>
+</com.nirhart.parallaxscroll.views.ParallaxScrollView>
