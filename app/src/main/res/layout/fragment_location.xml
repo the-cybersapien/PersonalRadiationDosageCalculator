@@ -5,6 +5,7 @@
     android:id="@+id/fragment_location"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:background="#000000"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -46,7 +47,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
-                app:cardBackgroundColor="#2d7588"
+                app:cardBackgroundColor="@color/cardViewBackground"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="5dp">
 
@@ -71,10 +72,11 @@
 
                         <EditText
                             android:id="@+id/locationEditText"
-                            android:layout_width="270dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
                             android:layout_marginTop="5dp"
+                            android:layout_marginRight="60dp"
                             android:ellipsize="end"
                             android:hint="Enter your location/Pin Code"
                             android:maxLines="1"
@@ -85,8 +87,9 @@
                             android:id="@+id/search_location"
                             android:layout_width="60dp"
                             android:layout_height="40dp"
-                            android:layout_marginLeft="270dp"
                             android:layout_marginTop="5dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="15dp"
                             android:background="#00000000"
                             android:src="@android:drawable/ic_menu_search" />
 
@@ -305,7 +308,7 @@
                 style="@style/CardView.Base"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                app:cardBackgroundColor="#2d7588"
+                app:cardBackgroundColor="@color/cardViewBackground"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="5dp">
 

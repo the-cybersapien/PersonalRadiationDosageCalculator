@@ -180,6 +180,7 @@ public class LifeStyleFragment extends Fragment {
                         luminousWatches = 0.6;
                         updateUI.addRads(luminousWatches);
                         wristWatchRads.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(luminousWatches, context)));
+                        wristWatchRads.setTextColor(getResources().getColor(R.color.error_color));
                         wristWatchRads.setVisibility(View.VISIBLE);
                     }
                     break;
