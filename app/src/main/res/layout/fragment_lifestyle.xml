@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#BDBDBD"
+    android:background="@android:color/black"
     tools:context="fragments.LifeStyleFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000">
+        android:background="@android:color/black">
 
         <ImageView
             android:id="@+id/bg"
@@ -28,7 +28,7 @@
             android:layout_marginTop="80dp"
             android:text="Lifestyle"
             android:fontFamily="sans-serif-condensed"
-            android:textColor="#FFFFFF"
+            android:textColor="@android:color/white"
             android:textSize="40sp" />
 
 
@@ -58,7 +58,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@style/TextAppearance.Question"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@android:color/white"
                         android:text="Have you had a medical Exam or procedure, like X-ray, in the last 12 months?"/>
 
                     <RadioGroup
@@ -70,7 +70,7 @@
                         <RadioButton
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@android:color/white"
                             android:layout_height="wrap_content"
                             android:text="Yes"
                             android:id="@+id/medical_choice_yes_button"/>
@@ -78,7 +78,7 @@
                         <RadioButton
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@android:color/white"
                             android:layout_height="wrap_content"
                             android:text="No"
                             android:id="@+id/medical_choice_no_button"/>
@@ -117,7 +117,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@style/TextAppearance.Question"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@android:color/white"
                         android:text="How many kilometres on average per year do you travel by jet?"/>
 
                     <LinearLayout
@@ -129,7 +129,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@android:color/white"
                             android:id="@+id/kilometres_by_jet_edit_text"
                             android:inputType="number"/>
 
@@ -173,7 +173,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@style/TextAppearance.Question"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@android:color/white"
                         android:text="How many packs of cigarettes do you smoke per DAY?"/>
 
                     <LinearLayout
@@ -185,7 +185,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@android:color/white"
                             android:id="@+id/cigarette_packs_edit_text"
                             android:inputType="number"/>
 
@@ -230,7 +230,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@style/TextAppearance.Question"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@android:color/white"
                         android:text="Do you wear a luminous Wristwatch?"/>
 
                     <RadioGroup
@@ -244,7 +244,7 @@
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:text="Yes"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@android:color/white"
                             android:id="@+id/wristwatch_yes"/>
 
                         <RadioButton
@@ -252,7 +252,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="No"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@android:color/white"
                             android:id="@+id/wristwatch_no"/>
 
                         <TextView
@@ -261,7 +261,7 @@
                             android:id="@+id/wristwatch_rads"
                             style="@style/TextAppearance.AddRadiation"
                             android:visibility="gone"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@android:color/white"
                             tools:text="451"/>
 
                     </RadioGroup>
