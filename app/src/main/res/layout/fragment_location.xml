@@ -23,17 +23,10 @@
             android:src="@drawable/background1" />
 
         <TextView
+            style="@style/TextAppearance.Headings"
             android:id="@+id/where_you_live"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="80dp"
             android:text="Where you Live"
-            android:fontFamily="sans-serif-condensed"
-            android:textColor="#FFFFFF"
-            android:textSize="40sp" />
+            android:fontFamily="sans-serif-condensed" />
 
 
         <LinearLayout
@@ -44,12 +37,7 @@
 
             <android.support.v7.widget.CardView
                 style="@style/CardView.Base"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="20dp"
-                app:cardBackgroundColor="@color/cardViewBackground"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="5dp">
+                android:layout_marginTop="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -57,43 +45,42 @@
                     android:orientation="vertical"
                     android:padding="5dp">
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:orientation="horizontal"
                         android:layout_marginTop="10dp">
 
-                        <ImageView
+                        <!--ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp"
                             android:adjustViewBounds="true"
-                            android:src="@drawable/bg1" />
+                            android:src="@drawable/bg1" /-->
 
                         <EditText
                             android:id="@+id/locationEditText"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
                             android:layout_marginTop="5dp"
-                            android:layout_marginRight="60dp"
                             android:ellipsize="end"
                             android:hint="Enter your location/Pin Code"
                             android:maxLines="1"
+                            style="@style/TextAppearance.Options"
                             android:scrollHorizontally="false"
                             android:textSize="14sp" />
 
                         <ImageButton
                             android:id="@+id/search_location"
-                            android:layout_width="60dp"
-                            android:layout_height="40dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="15dp"
                             android:background="#00000000"
                             android:src="@android:drawable/ic_menu_search" />
 
-                    </RelativeLayout>
+                    </LinearLayout>
 
                     <RelativeLayout
                         android:id="@+id/cosmic_layout"
@@ -101,7 +88,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:orientation="horizontal"
-                        android:visibility="gone">
+                        android:visibility="gone"
+                        tools:visibility="visible">
 
                         <ImageView
                             android:id="@+id/img6"
@@ -117,6 +105,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
                             android:layout_marginTop="15dp"
+                            android:textColor="@android:color/black"
                             android:text="Cosmic Radiation: "
                             android:textSize="14sp" />
 
@@ -158,6 +147,7 @@
                             android:layout_marginLeft="20dp"
                             android:layout_marginTop="15dp"
                             android:text="Terrestial Radiation: "
+                            android:textColor="@android:color/black"
                             android:textSize="14sp" />
 
                         <TextView
@@ -196,6 +186,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
+                            android:textColor="@android:color/black"
                             android:layout_marginTop="15dp"
                             android:text="Cosmogenic Atm. Radiation: "
                             android:textSize="14sp" />
@@ -238,6 +229,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
                             android:layout_marginTop="15dp"
+                            android:textColor="@android:color/black"
                             android:text="Atmospheric Radiation: "
                             android:textSize="14sp" />
 
@@ -280,6 +272,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
                             android:layout_marginTop="15dp"
+                            android:textColor="@android:color/black"
                             android:text="Ingested Radiation: "
                             android:textSize="14sp" />
 
@@ -305,12 +298,7 @@
 
 
             <android.support.v7.widget.CardView
-                style="@style/CardView.Base"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                app:cardBackgroundColor="@color/cardViewBackground"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="5dp">
+                style="@style/CardView.Base">
 
                 <LinearLayout
                     android:layout_width="match_parent"
