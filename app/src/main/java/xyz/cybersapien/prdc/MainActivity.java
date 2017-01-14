@@ -234,6 +234,12 @@ public class MainActivity extends AppCompatActivity implements UpdateUI {
         });
     }
 
+    /**
+     * onActivityResult
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -248,6 +254,9 @@ public class MainActivity extends AppCompatActivity implements UpdateUI {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * ViewPager Adapter for fragments
+     */
     private class MainPagerAdapter extends FragmentStatePagerAdapter{
 
         MainPagerAdapter(FragmentManager fm) {
