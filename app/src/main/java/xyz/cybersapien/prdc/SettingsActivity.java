@@ -16,6 +16,7 @@ public class SettingsActivity extends PreferenceActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.SettingsTheme);
         super.onCreate(savedInstanceState);
 
         // Display Fragment as main content
