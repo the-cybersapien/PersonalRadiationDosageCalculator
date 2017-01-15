@@ -250,7 +250,7 @@ public class HelperUtils {
         return loc;
     }
 
-    private static String makeHttpRequest(URL url) throws IOException {
+    public static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
 
         if (url == null)

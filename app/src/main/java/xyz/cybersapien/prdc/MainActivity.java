@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rd.PageIndicatorView;
@@ -56,11 +57,14 @@ public class MainActivity extends AppCompatActivity implements UpdateUI {
     @BindView(R.id.fragment_container) ViewPager mViewPager;
 
     @BindView(R.id.pageIndicatorView) PageIndicatorView pageIndicatorView;
-    @BindView(R.id.rads_explanation) TextView explanationTextView;
     @BindView(R.id.main_button_next) Button nextButton;
     @BindView(R.id.main_button_prev) Button prevButton;
 
+    @BindView(R.id.bottom_bar) LinearLayout bottom_bar;
+
     private Double totalRads;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,32 +75,19 @@ public class MainActivity extends AppCompatActivity implements UpdateUI {
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
 
-        // Initialize the total Radiations to zero
-        totalRads = 0d;
-        updateRads();
-
         PagerAdapter mPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
-        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
-            @Override
-            public void onPageSelected(int position) {
-                switch (position){
-                    case 0:
-                        updateToLocationFragment();
-                        break;
-                    case 1:
-                        updateToLifestyleFragment();
-                        break;
-                    case 2:
-                        updateToResultsFragment();
-                        break;
-                }
-                super.onPageSelected(position);
-            }
-        });
+        mViewPager.addOnPageChangeListener(fragmentsPageChangeListener);
 
         pageIndicatorView.setViewPager(mViewPager);
 
+        if (savedInstanceState == null){
+            totalRads = 0d;
+        } else {
+            totalRads = savedInstanceState.getDouble("total");
+        }
+
+        updateRads();
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         if (!HelperUtils.isInternetConnected(this)){
@@ -119,6 +110,11 @@ public class MainActivity extends AppCompatActivity implements UpdateUI {
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putDouble("total", totalRads);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -142,7 +138,26 @@ public class MainActivity extends AppCompatActivity implements UpdateUI {
         return super.onOptionsItemSelected(item);
     }
 
+    private ViewPager.SimpleOnPageChangeListener fragmentsPageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
 
+        @Override
+        public void onPageSelected(int position) {
+            switch (position){
+                case 0:
+                    updateToLocationFragment();
+                    break;
+                case 1:
+                    updateToLifestyleFragment();
+                    break;
+                case 2:
+                    updateToResultsFragment();
+                    resultsFragment.updateAnnualRadiationDosage();
+                    break;
+            }
+
+            super.onPageSelected(position);
+        }
+    };
 
     /**
      * Public method to let other activities to update the total radiation tally in the Calculator.
@@ -186,10 +201,9 @@ public class MainActivity extends AppCompatActivity implements UpdateUI {
     }
 
     private void updateToLocationFragment(){
+        bottom_bar.setVisibility(View.VISIBLE);
         nextButton.setText("NEXT");
         nextButton.setVisibility(View.VISIBLE);
-        explanationTextView.setVisibility(View.VISIBLE);
-        explanationTextView.setText("SAMPLE EXPLANATIONS FOR LOCATION");
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,8 +214,7 @@ public class MainActivity extends AppCompatActivity implements UpdateUI {
     }
 
     private void updateToLifestyleFragment(){
-        explanationTextView.setVisibility(View.VISIBLE);
-        explanationTextView.setText("SAMPLE EXPLANATION FOR LIFESTYLE");
+        bottom_bar.setVisibility(View.VISIBLE);
         nextButton.setText("FINISH");
         nextButton.setVisibility(View.VISIBLE);
         prevButton.setText("BACK");
@@ -221,21 +234,11 @@ public class MainActivity extends AppCompatActivity implements UpdateUI {
     }
 
     private void updateToResultsFragment(){
-        explanationTextView.setText("");
-        explanationTextView.setVisibility(View.GONE);
-        nextButton.setVisibility(View.INVISIBLE);
-        prevButton.setText("BACK");
-        prevButton.setVisibility(View.VISIBLE);
-        prevButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        bottom_bar.setVisibility(View.INVISIBLE);
     }
 
     /**
-     * onActivityResult
+     * onActivityResult Used for getting the Location Updates for the Location Fragment
      * @param requestCode
      * @param resultCode
      * @param data

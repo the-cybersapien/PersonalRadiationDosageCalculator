@@ -1,13 +1,57 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_light_background"
-    tools:context="xyz.cybersapien.prdc.fragments.ResultsFragment">
+    android:background="@android:color/black"
+    tools:context="xyz.cybersapien.prdc.fragments.ResultsFragment"
+    >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="TODO: Add Final Data informing user about his personal Radiation Dosage and compare with national avg." />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:textAlignment="center"
+            android:text="Your Total Annual Radiation Dosage is: "/>
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            tools:text="25.00 Sv"
+            android:id="@+id/annual_radiation_dosage"
+            android:background="@color/colorAccent"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:textAlignment="center"
+            android:text="The National Average Radiation Dosage is: "/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:id="@+id/national_average_view"
+            android:textColor="@android:color/black"
+            tools:text="25.00 Sv"
+            android:background="@color/colorAccent"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
