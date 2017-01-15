@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/cardViewBackground"
     android:padding="5dp">
 
     <LinearLayout
@@ -20,8 +22,9 @@
         <CheckBox
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            style="@style/TextAppearance.Options"
             android:text="X-ray"
-            android:id="@+id/medical_check_xray"/>
+            android:id="@+id/medical_check_xray" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,7 +33,8 @@
             android:id="@+id/medical_xray_container"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,6 +45,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    style="@style/TextAppearance.Options"
                     android:id="@+id/medical_xray_skull"
                     android:text="Skull"/>
 
@@ -63,6 +68,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_xray_chest"
+                    style="@style/TextAppearance.Options"
                     android:text="Chest"/>
 
                 <TextView
@@ -83,6 +89,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    style="@style/TextAppearance.Options"
                     android:id="@+id/medical_xray_thoracic_spine"
                     android:text="Thoracic Spine"/>
 
@@ -105,6 +112,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_xray_lumbar_spine"
+                    style="@style/TextAppearance.Options"
                     android:text="Lumbar Spine"/>
 
                 <TextView
@@ -126,6 +134,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_xray_abdomen"
+                    style="@style/TextAppearance.Options"
                     android:text="Abdomen"/>
 
                 <TextView
@@ -147,6 +156,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_xray_pelvis"
+                    style="@style/TextAppearance.Options"
                     android:text="Pelvis"/>
 
                 <TextView
@@ -168,6 +178,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_xray_dental_films"
+                    style="@style/TextAppearance.Options"
                     android:text="Dental Films"/>
 
                 <TextView
@@ -189,6 +200,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_xray_limbs_joints"
+                    style="@style/TextAppearance.Options"
                     android:text="Limbs and Joints"/>
 
                 <TextView
@@ -227,6 +239,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:text="Procedure"
+            style="@style/TextAppearance.Options"
             android:id="@+id/medical_check_procedure"/>
 
         <LinearLayout
@@ -236,7 +249,8 @@
             android:id="@+id/medical_procedure_container"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -247,6 +261,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    style="@style/TextAppearance.Options"
                     android:id="@+id/medical_procedure_IVP"
                     android:text="IVP (kidneys)"/>
 
@@ -268,6 +283,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    style="@style/TextAppearance.Options"
                     android:id="@+id/medical_procedure_barium_swallow"
                     android:text="Barium Swallow (Esophagram)"/>
 
@@ -288,6 +304,7 @@
                 <CheckBox
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    style="@style/TextAppearance.Options"
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_procedure_barium_meal"
                     android:text="Barium meal"/>
@@ -310,6 +327,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    style="@style/TextAppearance.Options"
                     android:id="@+id/medical_procedure_barium_follow_up"
                     android:text="Barium Follow-up"/>
 
@@ -332,6 +350,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_procedure_barium_enema"
+                    style="@style/TextAppearance.Options"
                     android:text="Barium enema"/>
 
                 <TextView
@@ -353,6 +372,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_procedure_CT_head"
+                    style="@style/TextAppearance.Options"
                     android:text="CT Scan (head)"/>
 
                 <TextView
@@ -374,6 +394,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_procedure_CT_chest"
+                    style="@style/TextAppearance.Options"
                     android:text="CT Scan (chest)"/>
 
                 <TextView
@@ -395,6 +416,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_procedure_CT_abdomen"
+                    style="@style/TextAppearance.Options"
                     android:text="CT Scan (abdomen)"/>
 
                 <TextView
@@ -416,6 +438,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_procedure_CT_pelvis"
+                    style="@style/TextAppearance.Options"
                     android:text="CT Scan (pelvis)"/>
 
                 <TextView
@@ -437,6 +460,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_procedure_PTCA"
+                    style="@style/TextAppearance.Options"
                     android:text="PTCA (heart study)"/>
 
                 <TextView
@@ -458,6 +482,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_procedure_coronary"
+                    style="@style/TextAppearance.Options"
                     android:text="Coronary Angiography"/>
 
                 <TextView
@@ -479,6 +504,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/medical_procedure_mammogram"
+                    style="@style/TextAppearance.Options"
                     android:text="Mammogram"/>
 
                 <TextView

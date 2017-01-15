@@ -1,5 +1,7 @@
 package xyz.cybersapien.prdc.fragments;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import xyz.cybersapien.prdc.helpers.*;
 import xyz.cybersapien.prdc.*;
 
@@ -22,6 +24,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import butterknife.ButterKnife;
@@ -45,6 +49,9 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
 
     private static final String LOG_TAG = LocationFragment.class.getName();
 
+    @BindView(R.id.why_location_img) ImageView whyImageButton;
+    @BindView(R.id.why_location_textView) TextView whyTextView;
+
     public static final int LOCATION_CHECK_REQUEST = 101;
 
     private View fragmentView;
@@ -63,11 +70,13 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
 
     private Context context;
 
+    // Check to see if the why cardView is open or closed
+    private boolean isWhyExpanded;
+
+
     public LocationFragment() {
 
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,29 +101,10 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
         });
 
         RadioGroup materialGroup = (RadioGroup) fragmentView.findViewById(R.id.residenceBuildingGroup);
-        materialGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                TextView radsTextView = (TextView) fragmentView.findViewById(R.id.residence_radiation_value);
-                switch (checkedId){
-                    case R.id.radioYes:
-                        if (residenceRadiation == 0){
-                            residenceRadiation = HelperUtils.RESIDENT_MATERIAL_RADIATION;
-                            updateUI.addRads(residenceRadiation);
-                            radsTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(residenceRadiation, context)));
-                            radsTextView.setVisibility(View.VISIBLE);
-                        }
-                        break;
-                    case R.id.radioNo:
-                        if (residenceRadiation == HelperUtils.RESIDENT_MATERIAL_RADIATION){
-                            updateUI.addRads(-residenceRadiation);
-                            residenceRadiation = 0;
-                            radsTextView.setVisibility(View.GONE);
-                        }
-                        break;
-                }
-            }
-        });
+        materialGroup.setOnCheckedChangeListener(houseCheckedListener);
+
+        whyImageButton.setImageResource(R.drawable.ic_angle_down);
+        isWhyExpanded = false;
 
         return fragmentView;
     }
@@ -199,6 +189,19 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
         }
     }
 
+    @OnClick(R.id.why_fragment_location)
+    public void expandCollapseWhy(){
+        if (isWhyExpanded){
+            whyTextView.setVisibility(View.GONE);
+            whyImageButton.setImageResource(R.drawable.ic_angle_down);
+            isWhyExpanded = false;
+        } else {
+            whyImageButton.setImageResource(R.drawable.ic_angle_up);
+            isWhyExpanded = true;
+            whyTextView.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void getRads(){
         GetRadsTask getRadsTask = new GetRadsTask();
         getRadsTask.execute(location);
@@ -266,6 +269,30 @@ public class LocationFragment extends Fragment implements GoogleApiClient.Connec
             onConnected(null);
         }
     }
+
+    private RadioGroup.OnCheckedChangeListener houseCheckedListener = new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            TextView radsTextView = (TextView) fragmentView.findViewById(R.id.residence_radiation_value);
+            switch (checkedId){
+                case R.id.radioYes:
+                    if (residenceRadiation == 0){
+                        residenceRadiation = HelperUtils.RESIDENT_MATERIAL_RADIATION;
+                        updateUI.addRads(residenceRadiation);
+                        radsTextView.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(residenceRadiation, context)));
+                        radsTextView.setVisibility(View.VISIBLE);
+                    }
+                    break;
+                case R.id.radioNo:
+                    if (residenceRadiation == HelperUtils.RESIDENT_MATERIAL_RADIATION){
+                        updateUI.addRads(-residenceRadiation);
+                        residenceRadiation = 0;
+                        radsTextView.setVisibility(View.GONE);
+                    }
+                    break;
+            }
+        }
+    };
 
     private class GetRadsTask extends AsyncTask<Location, Void, Double> {
 

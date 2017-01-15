@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -32,6 +34,10 @@ public class LifeStyleFragment extends Fragment {
     @BindView(R.id.rads_by_cigarette) TextView radsByCigarettes;
 
     @BindView(R.id.wristwatch_rads) TextView wristWatchRads;
+
+    @BindView(R.id.why_fragment_lifestyle) LinearLayout whyLinearLayout;
+    @BindView(R.id.why_imageview) ImageView whyImageButton;
+    @BindView(R.id.why_textView) TextView whyTextView;
 
     private LayoutInflater layoutInflater;
     private UpdateUI updateUI;
@@ -76,6 +82,9 @@ public class LifeStyleFragment extends Fragment {
 
     // Cache for recalculation of Radiation due to Luminous Watches
     private double luminousWatches;
+
+    // Check to see if the why cardView is open or closed
+    private boolean isWhyExpanded;
 
     public LifeStyleFragment() {
         // Required empty public constructor
@@ -129,6 +138,10 @@ public class LifeStyleFragment extends Fragment {
         RadioGroup luminousWatchGroup = (RadioGroup) containerView.findViewById(R.id.wristwatch_group);
         luminousWatchGroup.setOnCheckedChangeListener(watchChangeListener);
         ButterKnife.bind(this, containerView);
+
+        isWhyExpanded = false;
+        whyImageButton.setImageResource(R.drawable.ic_angle_down);
+
         return containerView;
     }
 
@@ -171,6 +184,20 @@ public class LifeStyleFragment extends Fragment {
         }
     }
 
+    @OnClick(R.id.why_fragment_lifestyle)
+    public void whyExpandCollapse(){
+        if (isWhyExpanded){
+            whyTextView.setVisibility(View.GONE);
+            whyImageButton.setImageResource(R.drawable.ic_angle_down);
+            isWhyExpanded = false;
+        } else {
+            whyImageButton.setImageResource(R.drawable.ic_angle_up);
+            isWhyExpanded = true;
+            whyTextView.setVisibility(View.VISIBLE);
+        }
+    }
+
+
     private RadioGroup.OnCheckedChangeListener watchChangeListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -180,6 +207,7 @@ public class LifeStyleFragment extends Fragment {
                         luminousWatches = 0.6;
                         updateUI.addRads(luminousWatches);
                         wristWatchRads.setText(getString(R.string.additional_radiation_display, HelperUtils.getPreferredValue(luminousWatches, context)));
+                        wristWatchRads.setTextColor(getResources().getColor(R.color.error_color));
                         wristWatchRads.setVisibility(View.VISIBLE);
                     }
                     break;
@@ -693,4 +721,6 @@ public class LifeStyleFragment extends Fragment {
             }
         }
     };
+
+
 }

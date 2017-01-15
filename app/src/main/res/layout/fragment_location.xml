@@ -1,262 +1,420 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.nirhart.parallaxscroll.views.ParallaxScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_location"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#000000"
     android:orientation="vertical"
-    android:background="#E8E8E8"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context="xyz.cybersapien.prdc.fragments.LocationFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <android.support.v7.widget.CardView
-            style="@style/CardView.Base">
+        <ImageView
+            android:id="@+id/bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/background1" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:orientation="vertical">
+        <TextView
+            style="@style/TextAppearance.Headings"
+            android:id="@+id/where_you_live"
+            android:text="Where you Live"
+            android:fontFamily="sans-serif-condensed" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="130dp"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                style="@style/CardView.Base">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:orientation="horizontal">
+                    android:padding="5dp"
+                    android:id="@+id/why_fragment_location"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        style="@style/TextAppearance.Question"
-                        android:text="1. "/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        style="@style/TextAppearance.Question"
-                        android:text="Enter your city of Residence: "/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter your location/Pin Code"
-                        android:id="@+id/locationEditText"
-                        android:maxLines="1"
-                        android:scrollHorizontally="false"
-                        android:ellipsize="end"
-                        android:textSize="14sp" />
+                        android:orientation="horizontal">
 
-                    <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@android:drawable/ic_menu_search"
-                        style="@style/Buttons.Colored"
-                        android:id="@+id/search_location"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Why?"
+                            style="@style/TextAppearance.Question"
+                            android:textSize="22sp"/>
 
-                </LinearLayout>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            tools:src="@drawable/ic_angle_down"
+                            android:adjustViewBounds="true"
+                            android:visibility="visible"
+                            android:id="@+id/why_location_img"
+                            android:background="@android:color/transparent"/>
 
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/cosmic_layout"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Cosmic Radiation: "/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/cosmic_radiation_value"
-                style="@style/TextAppearance.AddRadiation"
-                tools:text="451"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/terrestial_layout"
-            android:orientation="horizontal"
-            tools:visibility="visible"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Terrestial Radiation: "/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/terrestial_radiation_value"
-                style="@style/TextAppearance.AddRadiation"
-                tools:text="451"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/cosmogenic_layout"
-            android:orientation="horizontal"
-            tools:visibility="visible"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Cosmogenic Atmospheric Radiation: "
-                android:id="@+id/textView" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/cosmogenic_radiation_value"
-                style="@style/TextAppearance.AddRadiation"
-                tools:text="451"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/inhalation_layout"
-            android:orientation="horizontal"
-            tools:visibility="visible"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Atmospheric Radiation: "/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/inhalation_radiation_value"
-                style="@style/TextAppearance.AddRadiation"
-                tools:text="451"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/ingestion_layout"
-            android:orientation="horizontal"
-            tools:visibility="visible"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Ingested Radiation: "/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/ingestion_radiation_value"
-                style="@style/TextAppearance.AddRadiation"
-                tools:text="451"/>
-
-        </LinearLayout>
-
-        <android.support.v7.widget.CardView
-            style="@style/CardView.Base" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:orientation="horizontal">
+                    </LinearLayout>
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        style="@style/TextAppearance.Question"
-                        android:text="2. "/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        style="@style/TextAppearance.Question"
-                        android:text="Do you live in a stone, brick or concrete building?"/>
-
-                </LinearLayout>
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/residenceBuildingGroup"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/radioYes"
-                        android:text="Yes" />
-
-                    <RadioButton
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/radioNo"
-                        android:text="No"/>
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/why_location_textView"
+                        android:textColor="@android:color/white"
+                        android:text="Radiation has always been around us. Background radiation on earth is almost as old as the earth itself. There are multiple factors contributing to the background radiation, such as the Cosmic Radiation, which increases with increase in altitude. Even the food we eat has a small amount of radioactive substance which is not harmful to consume."
                         android:visibility="gone"
-                        tools:visibility="visible"
-                        android:id="@+id/residence_radiation_value"
-                        style="@style/TextAppearance.AddRadiation"
-                        tools:text="451"/>
+                        tools:visibility="visible"/>
 
-                </RadioGroup>
+                </LinearLayout>
 
-            </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-        </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                style="@style/CardView.Base"
+                android:layout_marginTop="20dp">
 
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="5dp">
 
-</ScrollView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:textColorHint="@android:color/white"
+                            android:hint="Location/Pin Code"
+                            android:layout_height="wrap_content">
+
+                            <android.support.design.widget.TextInputEditText
+                                android:id="@+id/locationEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:ellipsize="end"
+                                android:textColorHint="@android:color/white"
+                                android:maxLines="1"
+                                style="@style/TextAppearance.Options"
+                                android:scrollHorizontally="false"
+                                android:textSize="14sp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageButton
+                            android:id="@+id/search_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:background="#00000000"
+                            android:adjustViewBounds="true"
+                            android:src="@android:drawable/ic_menu_search" />
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/cosmic_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/img6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/bg1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="15dp"
+                            android:textColor="@android:color/black"
+                            android:text="Cosmic Radiation: "
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/cosmic_radiation_value"
+                            style="@style/TextAppearance.AddRadiation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"
+                            android:textColor="#ff0000"
+                            android:textSize="15sp"
+                            tools:text="451" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/terrestial_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/img2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/bg1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="15dp"
+                            android:text="Terrestial Radiation: "
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/terrestial_radiation_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"
+                            android:textColor="#ff0000"
+                            android:textSize="15sp"
+                            tools:text="451" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/cosmogenic_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/img3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/bg1" />
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:textColor="@android:color/black"
+                            android:layout_marginTop="15dp"
+                            android:text="Cosmogenic Atm. Radiation: "
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/cosmogenic_radiation_value"
+                            style="@style/TextAppearance.AddRadiation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"
+                            android:textColor="#ff0000"
+                            android:textSize="15sp"
+                            tools:text="451" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/inhalation_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/img4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/bg1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="15dp"
+                            android:textColor="@android:color/black"
+                            android:text="Atmospheric Radiation: "
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/inhalation_radiation_value"
+                            style="@style/TextAppearance.AddRadiation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"
+                            android:textColor="#ff0000"
+                            android:textSize="15sp"
+                            tools:text="451" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/ingestion_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/img5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/bg1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="15dp"
+                            android:textColor="@android:color/black"
+                            android:text="Ingested Radiation: "
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/ingestion_radiation_value"
+                            style="@style/TextAppearance.AddRadiation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"
+                            android:textColor="#ff0000"
+                            android:textSize="15sp"
+                            tools:text="451" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                style="@style/CardView.Base">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="5dp">
+
+                        <TextView
+                            style="@style/TextAppearance.Question"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="2. " />
+
+                        <TextView
+                            style="@style/TextAppearance.Question"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:textColor="#FFFFFF"
+                            android:text="Do you live in a stone, brick or concrete building?" />
+
+                    </LinearLayout>
+
+                    <RadioGroup
+                        android:id="@+id/residenceBuildingGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radioYes"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="#FFFFFF"
+                            android:text="Yes" />
+
+                        <RadioButton
+                            android:id="@+id/radioNo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="#FFFFFF"
+                            android:text="No" />
+
+
+                        <TextView
+                            android:id="@+id/residence_radiation_value"
+                            style="@style/TextAppearance.AddRadiation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            tools:text="451"
+                            tools:visibility="visible" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</com.nirhart.parallaxscroll.views.ParallaxScrollView>

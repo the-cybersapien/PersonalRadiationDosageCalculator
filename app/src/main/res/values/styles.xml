@@ -19,17 +19,30 @@
 
     <style name="TextAppearance.Question" parent="TextAppearance.AppCompat.Menu">
         <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextAppearance.Headings" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginTop">80dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">40sp</item>
     </style>
 
     <style name="CardView.Base" parent="CardView">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
         <item name="cardElevation">5dp</item>
-        <item name="cardCornerRadius">2dp</item>
+        <item name="cardCornerRadius">5dp</item>
         <item name="cardPreventCornerOverlap">true</item>
-        <item name="cardBackgroundColor">@color/cardview_light_background</item>
+        <item name="cardBackgroundColor">@color/cardViewBackground</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
     </style>
 
     <style name="TextAppearance.AddRadiation" parent="TextAppearance.AppCompat">
@@ -46,6 +59,12 @@
     <style name="TextAppearance.Convertor.Unit" parent="TextAppearance.AppCompat.Large">
         <item name="android:textSize">22sp</item>
         <item name="android:gravity">bottom</item>
+    </style>
+    
+    <style name="TextAppearance.Options" parent="Theme.AppCompat">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
     </style>
 
     <style name="Buttons.Colored" parent="Widget.AppCompat.Button.Colored">

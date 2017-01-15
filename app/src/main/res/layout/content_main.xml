@@ -5,22 +5,8 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical"
+    android:background="@android:color/black"
     android:layout_width="match_parent" >
-
-    <android.support.v7.widget.CardView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent" >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:background="@color/cardview_light_background"
-            android:text="SAMPLE EXPLANATION TEXT FOR LOCATION/LIFESTYLE"
-            android:id="@+id/rads_explanation"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
-
-    </android.support.v7.widget.CardView>
 
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
@@ -32,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        android:id="@+id/bottom_bar"
         android:minHeight="?actionBarSize"
         android:layout_gravity="bottom"
         android:orientation="horizontal"
@@ -81,7 +68,7 @@
                     android:id="@+id/textView2" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorIcons"
