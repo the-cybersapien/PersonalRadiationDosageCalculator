@@ -288,6 +288,7 @@ public class HelperUtils {
     }
 
     public static String readFromStream(InputStream inputStream) throws IOException {
+
         StringBuilder output = new StringBuilder();
 
         if (inputStream != null){
@@ -299,7 +300,10 @@ public class HelperUtils {
                 line = reader.readLine();
             }
         }
-        return output.toString();
+        if (output.length() == 0)
+            return "";
+        else
+            return output.toString();
     }
 
     public static Location getNearestTabLocation(Location loc1){

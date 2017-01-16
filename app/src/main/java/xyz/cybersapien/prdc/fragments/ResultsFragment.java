@@ -107,11 +107,15 @@ public class ResultsFragment extends Fragment {
             String totalVal = null;
             try {
                 URL queryURL = new URL(queryURI.toString());
+
                 String jsonResponse = HelperUtils.makeHttpRequest(queryURL);
 
-                double nationalAverage = getAverage(jsonResponse);
+                double nationalAverage = 0d;
+                if (!jsonResponse.isEmpty() || jsonResponse != null)
+                    nationalAverage = getAverage(jsonResponse);
 
-                totalVal = HelperUtils.getPreferredValue(nationalAverage, getContext());
+                if (nationalAverage != 0)
+                    totalVal = HelperUtils.getPreferredValue(nationalAverage, getContext());
 
             } catch (IOException | JSONException e){
                 e.printStackTrace();
@@ -126,7 +130,11 @@ public class ResultsFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String value) {
-            natAvgTextView.setText(value);
+            if (value != null && !value.isEmpty()){
+                natAvgTextView.setText(value);
+            } else {
+                natAvgTextView.setText("Error Getting National Average!");
+            }
         }
 
         private double getAverage(String jsonResponse) throws JSONException {
