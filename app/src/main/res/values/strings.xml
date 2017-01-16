@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Nuclear Energy</string>
+    <string name="app_name">PRDC</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_convertor">Unit Convertor</string>
 
