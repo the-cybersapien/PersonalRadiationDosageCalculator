@@ -25,6 +25,7 @@ public class ConvertorActivity extends AppCompatActivity {
 
     @BindView(R.id.convertor_from_spinner) Spinner fromSpinner;
     @BindView(R.id.convertor_from_edit_text) EditText fromEditText;
+    @BindView(R.id.convertor_power_spinner) Spinner powerSpinner;
     @BindViews({R.id.rad_val_display
             , R.id.gray_val_display
             , R.id.rem_val_display
@@ -33,12 +34,16 @@ public class ConvertorActivity extends AppCompatActivity {
             , R.id.coulombPKilo_val_display})
             List<TextView> vals;
 
-    ArrayAdapter<CharSequence> fromSpinnerAdapter;
-
+    private ArrayAdapter<CharSequence> fromSpinnerAdapter;
+    private ArrayAdapter<CharSequence> powerSpinnerAdapter;
+    private double multiplier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        multiplier = 1d;
+
         setContentView(R.layout.activity_convertor);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -50,6 +55,12 @@ public class ConvertorActivity extends AppCompatActivity {
         fromSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         fromSpinner.setAdapter(fromSpinnerAdapter);
         fromSpinner.setOnItemSelectedListener(spinnerListener);
+
+        powerSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.power_ten, android.R.layout.simple_spinner_item);
+        powerSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        powerSpinner.setAdapter(powerSpinnerAdapter);
+        powerSpinner.setOnItemSelectedListener(powerSpinnerListener);
+
         fromEditText.addTextChangedListener(fromTextWatcher);
     }
 
@@ -62,7 +73,7 @@ public class ConvertorActivity extends AppCompatActivity {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (s.length() != 0){
-                updateData(Double.valueOf(s.toString()));
+                updateData(Double.valueOf(s.toString()) * multiplier);
             } else {
                 updateData(0d);
             }
@@ -70,6 +81,49 @@ public class ConvertorActivity extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    private AdapterView.OnItemSelectedListener powerSpinnerListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            switch (position){
+                case 0:
+                    multiplier = Math.pow(10, 9);
+                    break;
+                case 1:
+                    multiplier = Math.pow(10, 6);
+                    break;
+                case 2:
+                    multiplier = Math.pow(10, 3);
+                    break;
+                case 3:
+                    multiplier = Math.pow(10, 0);
+                    break;
+                case 4:
+                    multiplier = Math.pow(10, -2);
+                    break;
+                case 5:
+                    multiplier = Math.pow(10, -3);
+                    break;
+                case 6:
+                    multiplier = Math.pow(10, -6);
+                    break;
+                case 7:
+                    multiplier = Math.pow(10, -9);
+                    break;
+            }
+
+            String qString = fromEditText.getText().toString();
+            if (!qString.isEmpty())
+                updateData(Double.valueOf(fromEditText.getText().toString()) * multiplier);
+            else
+                updateData(0d);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
 
         }
     };
@@ -129,7 +183,7 @@ public class ConvertorActivity extends AppCompatActivity {
             }
             String qString = fromEditText.getText().toString();
             if (!qString.isEmpty())
-                updateData(Double.valueOf(fromEditText.getText().toString()));
+                updateData(Double.valueOf(fromEditText.getText().toString()) * multiplier);
             else
                 updateData(0d);
         }
