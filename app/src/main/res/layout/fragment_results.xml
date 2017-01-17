@@ -11,6 +11,55 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
 
+        <android.support.v7.widget.CardView
+            android:layout_marginTop="10dp"
+            style="@style/CardView.Base">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:id="@+id/why_fragment_results"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Why?"
+                        style="@style/TextAppearance.Question"
+                        android:textSize="22sp"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        tools:src="@drawable/ic_angle_down"
+                        android:adjustViewBounds="true"
+                        android:visibility="visible"
+                        android:id="@+id/why_imageview_results"
+                        android:background="@android:color/transparent"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/why_textView_results"
+                    android:textColor="@android:color/white"
+                    android:text="When we go for a medical procedure such as an X-ray, we are exposed to a low amount of radiation. While not harmful, as it is for a really short duration, this amount can contribute to the overall radiation exposure for a person.\n\tSmoking can also contribute to the radiation exposure on a cellular level, this is another good reason to quit smoking!"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

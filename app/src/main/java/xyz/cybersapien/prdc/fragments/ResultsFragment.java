@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,10 +47,15 @@ public class ResultsFragment extends Fragment {
 
     private boolean dataSent;
 
+    // Check to see if the why cardView is open or closed
+    private boolean isWhyExpanded;
+
     @BindView(R.id.national_average_view) TextView natAvgTextView;
     @BindView(R.id.annual_radiation_dosage) TextView annualRadiationDosage;
     @BindView(R.id.name_edit_text) EditText nameEditText;
     @BindView(R.id.submit_data) Button submitButton;
+    @BindView(R.id.why_textView_results) TextView whyTextView;
+    @BindView(R.id.why_imageview_results) ImageView whyImageButton;
 
     public ResultsFragment() {
         // Required empty public constructor
@@ -70,6 +76,9 @@ public class ResultsFragment extends Fragment {
         // Initialize and execute the Task to get National average
         getNatAvg nationalAveragetask = new getNatAvg();
         nationalAveragetask.execute();
+
+        isWhyExpanded = false;
+        whyImageButton.setImageResource(R.drawable.ic_angle_down);
 
         return rootView;
     }
@@ -235,4 +244,18 @@ public class ResultsFragment extends Fragment {
             return response;
         }
     }
+
+    @OnClick(R.id.why_fragment_results)
+    public void whyExpandCollapse(){
+        if (isWhyExpanded){
+            whyTextView.setVisibility(View.GONE);
+            whyImageButton.setImageResource(R.drawable.ic_angle_down);
+            isWhyExpanded = false;
+        } else {
+            whyImageButton.setImageResource(R.drawable.ic_angle_up);
+            isWhyExpanded = true;
+            whyTextView.setVisibility(View.VISIBLE);
+        }
+    }
+
 }
