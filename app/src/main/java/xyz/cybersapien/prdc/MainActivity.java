@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements UpdateUI {
      */
     private void updateRads() {
         TextView total = (TextView) findViewById(R.id.totalRadsTextView);
-        total.setText(getString(R.string.total_radiation_display, HelperUtils.getPreferredValue(totalRads, this)));
+        total.setText( "Total Radiation :"+getString(R.string.total_radiation_display, HelperUtils.getPreferredValue(totalRads, this)));
     }
 
     @Override
