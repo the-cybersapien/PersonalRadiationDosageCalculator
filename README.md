@@ -8,8 +8,8 @@
 
 |Screen | Preview|
 |:-----:|:-------:|
-|Location Fragment|![location fragment](screens/screens1.png)|
-|Lifestyle Fragment|![lifestyle fragment](screens/lifestyl1.png)|
+|Location Fragment|![location fragment](screens/screen1.png)|
+|Lifestyle Fragment|![lifestyle fragment](screens/lifestyle1.png)|
 |Final Fragment|![Final](screens/finalSubmission.png)|
 |Convertor Activity|![convertor Activity](screens/convertor.png)|
 
