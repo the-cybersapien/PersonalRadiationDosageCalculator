@@ -4,6 +4,9 @@
 >But there is a misconception among the general populous that all of nuclear radiation is harmful and this has led to people protesting nuclear power plants.
 >This app aims to clear that misconception and tells the user his own personal Radiation Dosage in an year and then compares it with the national average. This national average is crowd-sourced from the users of the application and is taken directly from a real-time database.
 
+## Download
+[Download here](http://cybersapien.xyz/portfolio/prdc/PRDC-release.apk "Download here")
+
 ## Screenshots
 
 |Screen | Preview|
